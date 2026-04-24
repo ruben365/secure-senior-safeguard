@@ -74,7 +74,7 @@ import { SEO } from "@/components/SEO";
 import { AnswerSummary } from "@/components/AnswerSummary";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { SectionDivider, MeshBackground } from "@/components/pro";
-import { WebsitePricingCards, WebsiteInsuranceCards } from "@/components/business/WebsitePricingCards";
+import { WebsitePricingCards } from "@/components/business/WebsitePricingCards";
 
 
 const platformSnapshotStats = [
@@ -928,59 +928,6 @@ function Business() {
             
 
             <WebsitePricingCards />
-          </div>
-        </section>
-
-        <SectionDivider variant="curve" color="muted" flip />
-
-        {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
-        <section id="website-insurance" className="py-10 md:py-16 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60 dark:bg-none dark:bg-[#1c1917]" />
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-          
-          <div className="container mx-auto relative z-10">
-            <SectionHeader
-              badge="Protect Your Investment"
-              title="Website Insurance"
-              subtitle="Security monitoring, backups, support, and performance optimization. Your site stays fast, safe, and online." />
-            
-
-            <WebsiteInsuranceCards onSubscribe={() => {
-                trackButtonClick("Subscribe Now - Website Insurance", "Website Insurance");
-                setWebsiteInsuranceOpen(true);
-              }} />
-
-            {/* Supporting photography — operations in action */}
-            <div className="max-w-5xl mx-auto mt-5">
-              <SectionImage
-                src={businessTeamMeeting}
-                alt="Business team collaborating during a strategy meeting"
-                variant="split-right"
-              >
-                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
-                  Built around your team
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Every plan includes onboarding, monthly check-ins, and a
-                  dedicated account contact — so your AI stack stays aligned
-                  with how your business actually operates.
-                </p>
-              </SectionImage>
-            </div>
-
-            {/* Trust badges */}
-            <AnimatedSection animation="fade-up" delay={200} className="mt-6 flex flex-wrap items-center justify-center gap-4">
-              {[
-              { icon: Lock, text: "Secure Payment" },
-              { icon: Shield, text: "30-Day Guarantee" },
-              { icon: CheckCircle, text: "Cancel Anytime" }].
-              map((item, i) =>
-              <div key={i} className="flex items-center gap-2 px-4 py-2 glass-subtle rounded-full text-xs hover:border-primary/30 transition-colors duration-300">
-                  <item.icon className="w-3.5 h-3.5 text-primary" />
-                  <span className="font-semibold">{item.text}</span>
-                </div>
-              )}
-            </AnimatedSection>
           </div>
         </section>
 
