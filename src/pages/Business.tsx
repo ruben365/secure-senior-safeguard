@@ -75,6 +75,7 @@ import { AnswerSummary } from "@/components/AnswerSummary";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { SectionDivider, MeshBackground } from "@/components/pro";
 import { WebsitePricingCards } from "@/components/business/WebsitePricingCards";
+import "./Business.css";
 
 
 const platformSnapshotStats = [
@@ -522,6 +523,12 @@ function Business() {
         {/* Hero — Dark cinematic theme */}
         <HeroBusiness onStrategyCall={openStrategyCall} />
 
+        {/* ═══════════════════ /AI PAGE DESIGN CANVAS ═══════════════════ */}
+        <div className="ai-page-canvas">
+          <div className="aip-blob b1" aria-hidden="true" />
+          <div className="aip-blob b2" aria-hidden="true" />
+          <div className="aip-blob b3" aria-hidden="true" />
+          <div className="aip-blob b4" aria-hidden="true" />
 
         {/* ═══════════════════ SERVICES ═══════════════════ */}
         <section id="services" className="py-10 md:py-16 relative overflow-hidden">
@@ -1694,6 +1701,9 @@ function Business() {
             15-minute scoping call. No pressure. Quoted upfront.
           </p>
         </CTASection>
+
+        </div>
+        {/* ═══════════════════ END /AI DESIGN CANVAS ═══════════════════ */}
 
         <Footer />
 
