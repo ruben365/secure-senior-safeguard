@@ -906,17 +906,30 @@ export const WebsitePricingCards = () => {
 
   return (
     <div className="wsp-root">
-      {/* Pricing cards */}
-      <div className="wsp-grid">
-        {PACKAGES.map(p => (
-          <PremiumCard
-            key={p.id}
-            pkg={p}
-            onGetStarted={() => { setBasePackage(p.id); setCheckoutOpen(true); }}
-            onGetQuote={() => { setQuoteType(p.id); setQuoteOpen(true); }}
-          />
-        ))}
-      </div>
+      {/* Floating blobs (decorative) */}
+      <div className="wsp-blob wsp-blob--1" aria-hidden="true" />
+      <div className="wsp-blob wsp-blob--2" aria-hidden="true" />
+      <div className="wsp-blob wsp-blob--3" aria-hidden="true" />
+
+      <div className="wsp-section">
+        {/* Heading */}
+        <div className="wsp-heading-wrap">
+          <span className="wsp-eyebrow"><span className="wsp-eyebrow-dot" /> WEB DESIGN</span>
+          <h1 className="wsp-h1">Websites That <span className="wsp-h1-accent">Sell For You</span></h1>
+          <p className="wsp-subhead">Fast, secure sites that turn visitors into paying customers. Ohio-based pricing, built to scale.</p>
+        </div>
+
+        {/* Pricing cards */}
+        <div className="wsp-grid">
+          {PACKAGES.map(p => (
+            <PremiumCard
+              key={p.id}
+              pkg={p}
+              onGetStarted={() => { setBasePackage(p.id); setCheckoutOpen(true); }}
+              onGetQuote={() => { setQuoteType(p.id); setQuoteOpen(true); }}
+            />
+          ))}
+        </div>
 
       {/* Market note */}
       <div className="wsp-market-note">
@@ -990,7 +1003,7 @@ export const WebsitePricingCards = () => {
             {/* Category groups */}
             {["core", "growth", "maintenance"].map(cat => (
               <div key={cat} className={`wsp-category-group${activeCategory === cat ? " active" : ""}`}>
-                <div className="wsp-addons-grid">
+                <div className="wsp-addons-grid wsp-addons-grid--orange">
                   {BUILD_ADDONS.filter(a => a.category === cat).map(a => {
                     const qty = selected[a.id] ?? 0;
                     const checked = qty > 0;
@@ -1108,6 +1121,7 @@ export const WebsitePricingCards = () => {
           Need something custom? <strong>Let's talk.</strong> Every project gets a free strategy call.
         </p>
       </div>
+      </div>{/* /wsp-section */}
 
       {/* Modals */}
       <CheckoutModal

@@ -916,19 +916,8 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WEB DESIGN ═══════════════════ */}
-        <section id="website-design" className="py-10 md:py-16 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
-          
-          <div className="container mx-auto relative z-10">
-            <SectionHeader
-              badge="Web Design"
-              title="Websites That Sell For You"
-              subtitle="Your website works around the clock. We build fast, secure sites that turn visitors into paying customers." />
-            
-
-            <WebsitePricingCards />
-          </div>
+        <section id="website-design" className="relative overflow-hidden">
+          <WebsitePricingCards />
         </section>
 
         {/* ═══════════════════ AI AGENTS PRICING ═══════════════════ */}
