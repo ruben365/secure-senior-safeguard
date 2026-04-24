@@ -943,7 +943,7 @@ export const WebsitePricingCards = () => {
 
         <div className="wsp-addons-header">
           <span className="wsp-addons-eyebrow">CUSTOMIZE</span>
-          <h2 className="wsp-addons-title">Build Your Perfect Package</h2>
+          <h2 className="wsp-addons-title">Build, Enhance, or Protect Your Website</h2>
           <p className="wsp-addons-sub">Pick a mode, choose your options — your total updates live.</p>
         </div>
 
