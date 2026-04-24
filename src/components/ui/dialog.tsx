@@ -52,10 +52,6 @@ const DialogContent = React.forwardRef<
         className,
       )}
       style={{
-        // CSS `translate` property is independent of `transform`, so the
-        // zoom-in/zoom-out animation can freely use transform without
-        // wiping the centering offset.
-        translate: "-50% -50%",
         animationTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
       }}
       {...props}

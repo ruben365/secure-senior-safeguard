@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import "./WebsitePricingCards.css";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -241,7 +241,7 @@ const PremiumCard = ({ pkg, onGetStarted, onGetQuote }: {
 }) => {
   const cssVars = { "--wsp-a": pkg.colorA, "--wsp-b": pkg.colorB, "--wsp-c": pkg.colorC } as React.CSSProperties;
   return (
-    <div className="wsp-col" style={{ animationDelay: pkg.id === "landing" ? "0.15s" : pkg.id === "business" ? "0.25s" : "0.35s" }}>
+    <div className={`wsp-col wsp-reveal ${pkg.id === "landing" ? "d-1" : pkg.id === "business" ? "d-2" : "d-3"}`}>
       <article className={`wsp-card${pkg.featured ? " wsp-card--pro" : ""} wsp-card--${pkg.id}`} style={cssVars}>
         <span className="wsp-edge-sheen" aria-hidden="true" />
         <span className="wsp-edge-ring" aria-hidden="true" />
@@ -286,6 +286,7 @@ const PremiumCard = ({ pkg, onGetStarted, onGetQuote }: {
         </ul>
         <div className="wsp-cta-wrap">
           <button className="wsp-cta" type="button" onClick={onGetStarted}>
+            <span aria-hidden="true" className="wsp-cta-sheen" />
             <span>GET STARTED</span>
             <span className="wsp-cta-arrow"><ArrowRightIcon /></span>
           </button>
@@ -881,6 +882,22 @@ export const WebsitePricingCards = () => {
 
   const customizeSectionRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll(".wsp-reveal").forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   const toggleAddon = useCallback((id: string) => {
     setSelected(prev => {
       const next = { ...prev };
@@ -949,9 +966,9 @@ export const WebsitePricingCards = () => {
       <div className="wsp-section">
         {/* Heading */}
         <div className="wsp-heading-wrap">
-          <span className="wsp-eyebrow"><span className="wsp-eyebrow-dot" /> WEB DESIGN</span>
-          <h1 className="wsp-h1">Websites That <span className="wsp-h1-accent">Sell For You</span></h1>
-          <p className="wsp-subhead">Fast, secure sites that turn visitors into paying customers. Ohio-based pricing, built to scale.</p>
+          <span className="wsp-eyebrow wsp-reveal"><span className="wsp-eyebrow-dot" /> WEB DESIGN</span>
+          <h1 className="wsp-h1 wsp-reveal d-1">Websites That <span className="wsp-h1-accent">Sell For You</span></h1>
+          <p className="wsp-subhead wsp-reveal d-2">Fast, secure sites that turn visitors into paying customers. Ohio-based pricing, built to scale.</p>
         </div>
 
         {/* Pricing cards */}
