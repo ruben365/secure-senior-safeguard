@@ -1,20 +1,46 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { HeroBusiness } from "@/components/HeroBusiness";
 import { PageTransition } from "@/components/PageTransition";
 import { ServiceInquiryDialog } from "@/components/ServiceInquiryDialog";
 import { SEO } from "@/components/SEO";
-import { AIPageContent } from "@/components/business/AIPageContent";
 import { trackButtonClick } from "@/utils/analyticsTracker";
 
 function Business() {
   const [heroInquiryOpen, setHeroInquiryOpen] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const openStrategyCall = useCallback(() => {
     setHeroInquiryOpen(true);
     trackButtonClick("Book Strategy Call", "Business Hero");
   }, []);
+
+  const resizeIframe = useCallback(() => {
+    const iframe = iframeRef.current;
+    if (!iframe || !iframe.contentWindow) return;
+    try {
+      const doc = iframe.contentWindow.document;
+      const height = Math.max(
+        doc.body?.scrollHeight ?? 0,
+        doc.documentElement?.scrollHeight ?? 0,
+      );
+      if (height > 0) iframe.style.height = `${height}px`;
+    } catch {
+      // same-origin only; ignore if blocked
+    }
+  }, []);
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+    const interval = window.setInterval(resizeIframe, 500);
+    window.addEventListener("resize", resizeIframe);
+    return () => {
+      window.clearInterval(interval);
+      window.removeEventListener("resize", resizeIframe);
+    };
+  }, [resizeIframe]);
 
   return (
     <PageTransition variant="fade">
@@ -63,7 +89,14 @@ function Business() {
 
         <Navigation overlay />
         <HeroBusiness onStrategyCall={openStrategyCall} />
-        <AIPageContent />
+        <iframe
+          ref={iframeRef}
+          src="/ai-content.html"
+          title="AI Services"
+          className="w-full border-0 block"
+          style={{ minHeight: "6000px", background: "#f7f6f3" }}
+          onLoad={resizeIframe}
+        />
         <Footer />
 
         <ServiceInquiryDialog
