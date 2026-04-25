@@ -17,7 +17,7 @@ import {
   BadgeCheck, CreditCard, Download, FileText, Home, Info, Minimize2,
   Moon, ShieldCheck, Sparkles, Sun, X, Lock,
   ShieldAlert, Loader2, Mic, KeyRound, Globe, StopCircle,
-  Paperclip, Settings, Folder, RotateCcw, CheckSquare, Square,
+  Paperclip, Settings, Folder, RotateCcw, CheckSquare, Square, Languages,
 } from "lucide-react";
 import {
   Dialog,
@@ -31,7 +31,23 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/sonner";
 import "@/styles/ai-analysis.css";
 
+// ─── Edge function base (secrets never leave the server) ─────────────────────
+
+const EDGE_BASE = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1`;
+const EDGE_KEY  = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+
+const LANG_NAMES: Record<string, string> = {
+  es: "Spanish", fr: "French",  de: "German",     zh: "Chinese",
+  pt: "Portug.", it: "Italian", ru: "Russian",    ar: "Arabic",
+  ja: "Japanese",ko: "Korean",  nl: "Dutch",       pl: "Polish",
+  tr: "Turkish", uk: "Ukrainian", vi: "Vietnamese",
+};
+
 // ─── Types ────────────────────────────────────────────────────────────────────
+
+interface BreachHit { name: string; title: string; date: string; dataClasses: string[]; }
+interface BreachCheckResult { breached: boolean; breaches: BreachHit[]; unconfigured?: boolean; message?: string; }
+interface TranslateResult { translated: string; language: string; }
 
 type ScanMode =
   | 'default' | 'email' | 'url' | 'phone' | 'image'
@@ -92,6 +108,11 @@ export default function TrainingAiAnalysis() {
     sendOnEnter: true,
     webSearch:   false,
   });
+  const [breachResult, setBreachResult]       = useState<BreachCheckResult | null>(null);
+  const [checkingBreach, setCheckingBreach]   = useState(false);
+  const [translateResult, setTranslateResult] = useState<TranslateResult | null>(null);
+  const [translating, setTranslating]         = useState(false);
+  const [translateLang, setTranslateLang]     = useState("es");
 
   // — Refs —
   const textareaRef      = useRef<HTMLTextAreaElement>(null);
@@ -153,6 +174,16 @@ export default function TrainingAiAnalysis() {
     if (/^@/.test(t)) return false;
     if (/^[a-z0-9][a-z0-9.\-]*\.[a-z]{2,}(\/[^\s]*)?$/i.test(t)) return false;
     return true;
+  }, [textInput]);
+
+  // Single bare email address → offer breach check
+  const looksLikeEmail = useMemo(() => {
+    const t = textInput.trim();
+    return (
+      t.split("\n").length === 1 &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(t) &&
+      t.length <= 254
+    );
   }, [textInput]);
 
   // — Keyboard shortcuts —
@@ -273,14 +304,39 @@ export default function TrainingAiAnalysis() {
   const toggleRecording = () => { if (isRecording) stopRecording(); else startRecording(); };
 
   // — Handlers —
-  const handleSend = useCallback((text: string) => {
+  const handleSend = useCallback(async (text: string) => {
     if (!text.trim()) return;
     if (!chatUnlocked) { setPaywallOpen(true); return; }
     const mode = detectScanMode(text, file);
-    const prefix = MODE_PROMPTS[mode] ?? '';
+    let prefix = MODE_PROMPTS[mode] ?? '';
+
+    // For URL mode, prepend Google Safe Browsing verdict before sending to Claude.
+    // 3-second timeout ensures the URL check never blocks the user experience.
+    if (mode === 'url') {
+      try {
+        const res = await fetch(`${EDGE_BASE}/check-url-safety`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', apikey: EDGE_KEY },
+          body: JSON.stringify({ url: text.trim() }),
+          signal: AbortSignal.timeout(3000),
+        });
+        if (res.ok) {
+          const data = await res.json() as { safe: boolean; threats: string[]; unconfigured?: boolean };
+          if (!data.unconfigured) {
+            const verdict = data.safe
+              ? 'Google Safe Browsing: CLEAN — no known threats'
+              : `Google Safe Browsing: FLAGGED — ${data.threats.join(', ')}`;
+            prefix = `[${verdict}]\n` + prefix;
+          }
+        }
+      } catch { /* proceed without GSB verdict on timeout or network error */ }
+    }
+
     sendMessage(prefix + text);
     setTextInput('');
     setPasswordResult(null);
+    setBreachResult(null);
+    setTranslateResult(null);
   }, [chatUnlocked, file, sendMessage]);
 
   const handlePasswordCheck = async () => {
@@ -315,6 +371,51 @@ export default function TrainingAiAnalysis() {
       setPasswordResult({ score, breaches: breachCount, suggestions });
     } finally {
       setCheckingPassword(false);
+    }
+  };
+
+  const handleBreachCheck = async () => {
+    const email = textInput.trim();
+    if (!email || !chatUnlocked) { if (!chatUnlocked) setPaywallOpen(true); return; }
+    setCheckingBreach(true);
+    setBreachResult(null);
+    try {
+      const res = await fetch(`${EDGE_BASE}/check-breach`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: EDGE_KEY },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json() as BreachCheckResult & { error?: string };
+      if (!res.ok) throw new Error(data.error ?? 'Breach check failed');
+      setBreachResult(data);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Breach check failed');
+    } finally {
+      setCheckingBreach(false);
+    }
+  };
+
+  const handleTranslate = async () => {
+    const text = textInput.trim();
+    if (!text || !chatUnlocked) { if (!chatUnlocked) setPaywallOpen(true); return; }
+    if (text.length > 500) { toast.error('Translate limit: 500 characters'); return; }
+    setTranslating(true);
+    setTranslateResult(null);
+    try {
+      const res = await fetch(`${EDGE_BASE}/translate-text`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: EDGE_KEY },
+        body: JSON.stringify({ text, targetLanguage: translateLang }),
+      });
+      const data = await res.json() as { translated?: string; unconfigured?: boolean; message?: string; error?: string };
+      if (!res.ok && res.status !== 503) throw new Error(data.error ?? 'Translation failed');
+      if (data.unconfigured) { toast.info(data.message ?? 'Translation not configured'); return; }
+      if (data.error) throw new Error(data.error);
+      if (data.translated) setTranslateResult({ translated: data.translated, language: translateLang });
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Translation failed');
+    } finally {
+      setTranslating(false);
     }
   };
 
@@ -686,6 +787,41 @@ export default function TrainingAiAnalysis() {
                 <Globe style={{ width: '16px', height: '16px' }} />
               </button>
 
+              {/* Translate button + language selector */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+                <button
+                  type="button"
+                  title={`Translate to ${LANG_NAMES[translateLang] ?? translateLang}`}
+                  disabled={translating || !textInput.trim()}
+                  onClick={handleTranslate}
+                  style={{
+                    ...toolBtn,
+                    color: translating ? '#4da3ff' : '#c9c9cd',
+                    background: translating ? 'rgba(77,163,255,0.15)' : 'transparent',
+                    opacity: !textInput.trim() ? 0.4 : 1,
+                  }}
+                >
+                  {translating
+                    ? <Loader2 style={{ width: '16px', height: '16px' }} className="animate-spin" />
+                    : <Languages style={{ width: '16px', height: '16px' }} />}
+                </button>
+                <select
+                  value={translateLang}
+                  onChange={e => setTranslateLang(e.target.value)}
+                  title="Target language"
+                  style={{
+                    background: 'transparent', border: 'none', color: '#7e7e88',
+                    fontSize: '11px', cursor: 'pointer', outline: 'none', padding: '0 2px',
+                  }}
+                >
+                  {Object.entries(LANG_NAMES).map(([code, name]) => (
+                    <option key={code} value={code} style={{ background: '#1c1c1e', color: '#e5e5ea' }}>
+                      {name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div style={sepStyle} />
 
               {/* Settings */}
@@ -733,6 +869,30 @@ export default function TrainingAiAnalysis() {
                   {preparingAuthorizedScan
                     ? <><Loader2 style={{ width: '13px', height: '13px' }} className="animate-spin" /> Preparing…</>
                     : <><Sparkles style={{ width: '13px', height: '13px' }} /> Scan</>}
+                </button>
+              )}
+
+              {/* Breach check (when input is a bare email address) */}
+              {looksLikeEmail && !file && (
+                <button
+                  type="button"
+                  title="Check email for data breaches (HaveIBeenPwned)"
+                  onClick={handleBreachCheck}
+                  disabled={checkingBreach}
+                  style={{
+                    height: '36px', padding: '0 14px', borderRadius: '999px',
+                    background: '#ff7a45', color: '#fff', border: 'none',
+                    fontSize: '12px', fontWeight: 600, cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', gap: '5px',
+                    boxShadow: '0 2px 8px rgba(255,122,69,0.4)',
+                    transition: 'transform 0.15s',
+                    opacity: checkingBreach ? 0.6 : 1,
+                  }}
+                  className="hover:scale-105 disabled:opacity-50"
+                >
+                  {checkingBreach
+                    ? <><Loader2 style={{ width: '13px', height: '13px' }} className="animate-spin" /> Checking…</>
+                    : <><ShieldAlert style={{ width: '13px', height: '13px' }} /> Check Breach</>}
                 </button>
               )}
 
@@ -817,6 +977,107 @@ export default function TrainingAiAnalysis() {
               >
                 <X style={{ width: '13px', height: '13px' }} />
               </button>
+            </div>
+          )}
+
+          {/* Breach result */}
+          {breachResult && (
+            <div
+              className="aia-slide-up mt-3"
+              style={{ width: 'min(640px, 92vw)', background: 'rgba(28,28,30,0.9)', backdropFilter: 'blur(8px)', borderRadius: '16px', padding: '16px 20px', border: '1px solid rgba(255,255,255,0.08)' }}
+            >
+              <p style={{ fontSize: '11px', fontWeight: 600, color: '#8a8a8f', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>
+                Email Breach Check · HaveIBeenPwned
+              </p>
+
+              <div style={{
+                fontSize: '13px', padding: '10px 14px', borderRadius: '10px', marginBottom: '12px',
+                display: 'flex', alignItems: 'center', gap: '8px',
+                background: breachResult.breached ? 'rgba(255,59,48,0.12)' : 'rgba(48,209,88,0.12)',
+                color: breachResult.breached ? '#ff3b30' : '#30d158',
+              }}>
+                {breachResult.breached
+                  ? <ShieldAlert style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+                  : <ShieldCheck style={{ width: '16px', height: '16px', flexShrink: 0 }} />}
+                {breachResult.breached
+                  ? `Found in ${breachResult.breaches.length} breach${breachResult.breaches.length !== 1 ? 'es' : ''} — change passwords immediately`
+                  : 'Not found in any known data breaches ✓'}
+              </div>
+
+              {breachResult.breached && breachResult.breaches.length > 0 && (
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  {breachResult.breaches.slice(0, 8).map(b => (
+                    <li key={b.name} style={{ fontSize: '12px', color: '#c9c9cd', display: 'flex', flexDirection: 'column', gap: '2px', paddingBottom: '6px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                      <span style={{ fontWeight: 600, color: '#e5e5ea' }}>{b.title} <span style={{ color: '#8a8a8f', fontWeight: 400 }}>({b.date})</span></span>
+                      <span style={{ color: '#8a8a8f', fontSize: '11px' }}>{b.dataClasses.slice(0, 5).join(', ')}</span>
+                    </li>
+                  ))}
+                  {breachResult.breaches.length > 8 && (
+                    <li style={{ fontSize: '11px', color: '#8a8a8f' }}>…and {breachResult.breaches.length - 8} more</li>
+                  )}
+                </ul>
+              )}
+
+              <div style={{ display: 'flex', gap: '8px' }}>
+                {breachResult.breached && (
+                  <button
+                    type="button"
+                    onClick={() => handleSend(`This email was found in ${breachResult.breaches.length} data breach(es). Breaches: ${breachResult.breaches.map(b => b.title).join(', ')}. What should I do?`)}
+                    style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '999px', background: '#ff7a45', border: 'none', color: '#fff', cursor: 'pointer' }}
+                  >
+                    Ask AI for advice
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setBreachResult(null)}
+                  style={{ fontSize: '11px', color: '#8a8a8f', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                  onMouseLeave={e => (e.currentTarget.style.color = '#8a8a8f')}
+                >
+                  Dismiss
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Translate result */}
+          {translateResult && (
+            <div
+              className="aia-slide-up mt-3"
+              style={{ width: 'min(640px, 92vw)', background: 'rgba(28,28,30,0.9)', backdropFilter: 'blur(8px)', borderRadius: '16px', padding: '16px 20px', border: '1px solid rgba(255,255,255,0.08)' }}
+            >
+              <p style={{ fontSize: '11px', fontWeight: 600, color: '#8a8a8f', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
+                Translation · {LANG_NAMES[translateResult.language] ?? translateResult.language}
+              </p>
+              <p style={{ fontSize: '14px', color: '#e5e5ea', lineHeight: 1.55, marginBottom: '12px', whiteSpace: 'pre-wrap' }}>
+                {translateResult.translated}
+              </p>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <button
+                  type="button"
+                  onClick={() => { navigator.clipboard.writeText(translateResult.translated); toast.success('Copied!'); }}
+                  style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '999px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.12)', color: '#c9c9cd', cursor: 'pointer' }}
+                >
+                  Copy
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setTextInput(translateResult.translated); setTranslateResult(null); }}
+                  style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '999px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.12)', color: '#c9c9cd', cursor: 'pointer' }}
+                >
+                  Use as input
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTranslateResult(null)}
+                  style={{ fontSize: '11px', color: '#8a8a8f', background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginLeft: 'auto' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                  onMouseLeave={e => (e.currentTarget.style.color = '#8a8a8f')}
+                >
+                  Dismiss
+                </button>
+              </div>
             </div>
           )}
 
