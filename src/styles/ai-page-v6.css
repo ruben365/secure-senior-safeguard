@@ -1,0 +1,215 @@
+/* ═══════════════════════════════════════════════
+   AI PAGE V6 — Design System
+   Cream-background design with gradient accents
+   ═══════════════════════════════════════════════ */
+
+/* ─── Tokens ─── */
+.ai-page-v6 {
+  --aip-bg:       #f7f6f3;
+  --aip-surface:  #ffffff;
+  --aip-ink:      #0f1724;
+  --aip-ink-2:    #2a3344;
+  --aip-muted:    #6b7280;
+  --aip-border:   #e5e3de;
+  --aip-starter:  #e08a4a;
+  --aip-pro:      #7c6fd0;
+  --aip-elite:    #4a8f90;
+  --aip-radius:   16px;
+  background-color: var(--aip-bg);
+  color: var(--aip-ink);
+}
+
+/* ─── Gradient blobs ─── */
+.aip-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.aip-blob.b1 {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(224,138,74,0.12), transparent 70%);
+  top: -120px; right: -200px;
+}
+.aip-blob.b2 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(124,111,208,0.10), transparent 70%);
+  bottom: 300px; left: -150px;
+}
+.aip-blob.b3 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(74,143,144,0.09), transparent 70%);
+  top: 55%; left: 40%;
+}
+
+/* ─── Cards ─── */
+.aip-card {
+  background: var(--aip-surface);
+  border: 1px solid var(--aip-border);
+  border-radius: var(--aip-radius);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.aip-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Dashboard mockup ─── */
+.aip-dashboard-mock {
+  background: var(--aip-surface);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 25px 60px -15px rgba(15, 23, 36, 0.12);
+  border: 1px solid var(--aip-border);
+}
+
+/* ─── Lifecycle grid ─── */
+.aip-lifecycle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .aip-lifecycle-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ─── Process steps ─── */
+.aip-process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--aip-surface);
+  border-radius: var(--aip-radius);
+  border: 1px solid var(--aip-border);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.aip-process-step:hover {
+  border-color: var(--aip-starter);
+  box-shadow: 0 8px 30px -10px rgba(224, 138, 74, 0.15);
+}
+
+/* ─── Why Choose Us — horizontal timeline ─── */
+.aip-timeline-line {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--aip-starter),
+    var(--aip-pro),
+    var(--aip-elite),
+    var(--aip-starter),
+    var(--aip-pro),
+    var(--aip-elite)
+  );
+}
+
+/* ─── FAQ accordion ─── */
+.aip-faq-item {
+  border-bottom: 1px solid var(--aip-border);
+}
+.aip-faq-item:last-child {
+  border-bottom: none;
+}
+.aip-faq-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--aip-ink);
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 1.5;
+  gap: 1rem;
+}
+.aip-faq-trigger:hover {
+  color: var(--aip-pro);
+}
+.aip-faq-content {
+  padding: 0 1.5rem 1.25rem;
+  color: var(--aip-muted);
+  line-height: 1.75;
+  font-size: 0.9375rem;
+}
+
+/* ─── Sunset CTA ─── */
+.aip-cta-sunset {
+  position: relative;
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #1a1410 0%, #2d1f14 40%, #1a2a2a 100%);
+  text-align: center;
+  overflow: hidden;
+}
+.aip-cta-sunset::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 120%, rgba(224,138,74,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(124,111,208,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(74,143,144,0.08) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* ─── Floating help button ─── */
+.aip-help-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--aip-pro);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(124, 111, 208, 0.45);
+  z-index: 40;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.aip-help-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 30px rgba(124, 111, 208, 0.55);
+}
+
+/* ─── Help modal ─── */
+.aip-help-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 36, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+@media (min-width: 640px) {
+  .aip-help-overlay {
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+}
+.aip-help-panel {
+  background: var(--aip-surface);
+  border-radius: 24px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--aip-border);
+}
