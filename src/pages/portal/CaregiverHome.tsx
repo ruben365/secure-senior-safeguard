@@ -76,7 +76,7 @@ function DashboardSkeleton() {
         </div>
         <div className="space-y-4">
           <Skeleton className="h-96 rounded-lg" />
-          <Skeleton className="h-18 rounded-lg" />
+          <Skeleton className="h-[4.5rem] rounded-lg" />
         </div>
       </div>
     </div>

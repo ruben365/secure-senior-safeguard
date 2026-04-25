@@ -693,12 +693,13 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(
             borderRadius: "1.25rem",
             boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.12), 0 4px 16px -4px rgba(0, 0, 0, 0.08)",
             maxWidth: "440px",
-            width: "92%",
+            width: "min(440px, calc(100vw - 32px))",
+            maxHeight: "calc(100svh - 32px)",
           }}
         >
           {/* ── Header ─────────────────────────────────────── */}
           <div
-            className="flex items-center justify-between px-5 pt-5 pb-2"
+            className="flex items-center justify-between px-5 pt-5 pb-2 pr-12"
           >
             <div className="flex items-center gap-2.5">
               <CreditCard className="w-5 h-5" style={{ color: T.copper }} />
@@ -729,7 +730,10 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(
           <ProgressBar step={stepNum} />
 
           {/* ── Body ───────────────────────────────────────── */}
-          <div className="px-5 pb-5">
+          <div
+            className="px-5 pb-5 overflow-y-auto"
+            style={{ maxHeight: "calc(100svh - 144px)" }}
+          >
             {state.step === "info" && (
               <CustomerInfoStep onNext={() => {}} />
             )}

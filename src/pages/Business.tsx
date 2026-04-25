@@ -1274,7 +1274,7 @@ function Business() {
                 
                 {activeConsultingTab === "thinking" &&
                 <div className="text-center animate-fade-in relative z-10">
-                    <div className="w-18 h-18 bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
+                    <div className="w-[4.5rem] h-[4.5rem] bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                       <span className="text-3xl">💭</span>
                     </div>
                     <h3 className="text-2xl font-black mb-3">Thinking About AI</h3>
@@ -1308,7 +1308,7 @@ function Business() {
 
                 {activeConsultingTab === "buying" &&
                 <div className="text-center animate-fade-in relative z-10">
-                    <div className="w-18 h-18 bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
+                    <div className="w-[4.5rem] h-[4.5rem] bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                       <span className="text-3xl">🔍</span>
                     </div>
                     <h3 className="text-2xl font-black mb-3">Buying AI</h3>
@@ -1343,7 +1343,7 @@ function Business() {
 
                 {activeConsultingTab === "bought" &&
                 <div className="text-center animate-fade-in relative z-10">
-                    <div className="w-18 h-18 bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
+                    <div className="w-[4.5rem] h-[4.5rem] bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                       <span className="text-3xl">🛡️</span>
                     </div>
                     <h3 className="text-2xl font-black mb-3">Already Bought AI</h3>
@@ -1378,7 +1378,7 @@ function Business() {
 
                 {activeConsultingTab === "leaving" &&
                 <div className="text-center animate-fade-in relative z-10">
-                    <div className="w-18 h-18 bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
+                    <div className="w-[4.5rem] h-[4.5rem] bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                       <span className="text-3xl">🚪</span>
                     </div>
                     <h3 className="text-2xl font-black mb-3">Want to Leave AI</h3>

@@ -49,6 +49,14 @@
   border-color: rgba(255, 255, 255, 0.18);
 }
 
+.ai-analysis-page .aia-top-menu {
+  -ms-overflow-style: none;
+}
+
+.ai-analysis-page .aia-top-menu::-webkit-scrollbar {
+  display: none;
+}
+
 .ai-analysis-page .aia-toolbar button,
 .ai-analysis-page .aia-toolbar a {
   transition: background-color 180ms ease, transform 180ms ease, color 180ms ease;
@@ -225,6 +233,14 @@
 
 .aia-slide-up {
   animation: aia-slide-up 240ms ease forwards;
+}
+
+@media (max-width: 640px) {
+  .ai-analysis-page .aia-top-menu {
+    left: 12px !important;
+    top: 12px !important;
+    max-width: calc(100vw - 76px) !important;
+  }
 }
 
 /* ─── Reduced motion ─────────────────────────────────────────────── */

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -75,6 +75,10 @@ export const WebDesignQuoteDialog = ({
   const [businessType, setBusinessType] = useState("");
   const [websiteType, setWebsiteType] = useState(preselectedType);
   const [numPages, setNumPages] = useState("");
+
+  useEffect(() => {
+    setWebsiteType(preselectedType || "");
+  }, [preselectedType]);
   const [featuresNeeded, setFeaturesNeeded] = useState<string[]>([]);
   const [budgetRange, setBudgetRange] = useState("");
   const [message, setMessage] = useState("");

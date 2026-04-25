@@ -53,7 +53,7 @@ export const HexagonIcon = ({
   const sizeClasses = {
     sm: "w-9 h-9",
     md: "w-12 h-12",
-    lg: "w-18 h-18",
+    lg: "w-[4.5rem] h-[4.5rem]",
   };
 
   return (

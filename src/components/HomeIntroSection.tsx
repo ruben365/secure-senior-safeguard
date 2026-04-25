@@ -203,7 +203,7 @@ export const HomeIntroSection = () => {
                   <img
                     src={familyGathering}
                     alt="Family gathering for safety training"
-                    className="w-full h-18 md:h-36 object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-[4.5rem] md:h-36 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                     decoding="async"
                   />
@@ -216,7 +216,7 @@ export const HomeIntroSection = () => {
                   <img
                     src={communityWorkshop}
                     alt="Community workshop"
-                    className="w-full h-18 md:h-36 object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-[4.5rem] md:h-36 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                     decoding="async"
                   />

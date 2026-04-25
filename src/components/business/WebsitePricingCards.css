@@ -63,6 +63,17 @@
   to   { opacity: 1; }
 }
 
+/* ── Scroll reveal ── */
+.wsp-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.wsp-reveal.visible { opacity: 1; transform: none; }
+.wsp-reveal.d-1 { transition-delay: 0.05s; }
+.wsp-reveal.d-2 { transition-delay: 0.15s; }
+.wsp-reveal.d-3 { transition-delay: 0.25s; }
+
 /* ════════════════════════════════════════════
    CARDS GRID
 ════════════════════════════════════════════ */
@@ -71,7 +82,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
-  align-items: stretch;
+  align-items: start;
   padding-top: 12px;
 }
 @media (min-width: 860px) {
@@ -79,8 +90,7 @@
 }
 
 .wsp-col {
-  opacity: 0;
-  animation: wsp-rise-in 0.8s var(--wsp-ease) both;
+  /* entrance handled by .wsp-reveal via IntersectionObserver */
 }
 
 /* ── Card shell ── */
@@ -99,7 +109,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  height: 100%;
+  height: auto;
   transition: transform 0.5s var(--wsp-ease), box-shadow 0.5s var(--wsp-ease), border-color 0.5s var(--wsp-ease);
 }
 .wsp-card:hover {
@@ -114,6 +124,7 @@
 .wsp-card:hover::after { opacity: 0.2; }
 .wsp-card:hover .wsp-edge-ring { opacity: 1; }
 .wsp-card:hover .wsp-edge-sheen { opacity: 0.45; }
+.wsp-card:hover .wsp-chip-icon-wrap { transform: translateY(-2px); }
 
 .wsp-card::before {
   content: "";
@@ -519,6 +530,7 @@
 .wsp-chip-icon-wrap {
   width: 18px; height: 18px;
   border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
   display: grid;
   place-items: center;
   background: linear-gradient(135deg, var(--wsp-a), var(--wsp-b));
@@ -732,6 +744,19 @@
 }
 .wsp-cta:hover .wsp-cta-arrow { background: rgba(255,255,255,0.2); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45); }
 .wsp-cta:hover .wsp-cta-arrow svg { transform: translateX(2px); }
+
+/* CTA shimmer sweep */
+.wsp-cta-sheen {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left 0.6s cubic-bezier(0.22,1,0.36,1);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.wsp-cta:hover .wsp-cta-sheen { left: 120%; }
 
 /* Quote link */
 .wsp-quote-link {

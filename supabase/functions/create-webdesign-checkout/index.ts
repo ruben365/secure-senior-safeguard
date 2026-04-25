@@ -26,16 +26,32 @@ const log = (step: string, details?: unknown) => {
   console.log(`[CREATE-WEBDESIGN-CHECKOUT] ${step}${d}`);
 };
 
+// Server-side price registry — never trust client-supplied amounts (issue 3)
+const PACKAGE_PRICES: Record<string, { name: string; price: number }> = {
+  landing:   { name: "Landing Page",     price: 1200 },
+  business:  { name: "Business Website", price: 2900 },
+  ecommerce: { name: "E-Commerce",       price: 6500 },
+};
+
+const ADDON_PRICES: Record<string, number> = {
+  logo: 400, domain_setup: 100, email_setup: 150, chatbot: 950,
+  seo_geo: 800, content: 200, extra_page: 250, revisions_30: 450,
+  blog: 550, booking: 650, crm: 1200, automation: 700,
+  maintenance: 80, ongoing_upd: 60, perf_opt: 400, security_mon: 40,
+  enh_pages: 250, enh_redesign: 350, enh_speed: 450,
+  enh_seo: 600, enh_integrations: 400,
+};
+
 interface AddOn {
   id: string;
   label: string;
   price: number;
+  qty?: number;
 }
 
 interface RequestBody {
   packageName: string;
   packageType: string;
-  totalAmount: number;      // dollars
   addOns: AddOn[];
   orderId?: string;
   customerEmail?: string;
@@ -71,7 +87,6 @@ serve(async (req: Request) => {
     const {
       packageName,
       packageType,
-      totalAmount,
       addOns,
       orderId,
       customerEmail,
@@ -79,29 +94,57 @@ serve(async (req: Request) => {
       cancelUrl,
     } = body;
 
-    log("Received request", { packageType, totalAmount, addOnsCount: addOns?.length });
+    log("Received request", { packageType, addOnsCount: addOns?.length });
 
-    if (!packageName || !totalAmount || !successUrl || !cancelUrl) {
+    if (!packageType || !successUrl || !cancelUrl) {
       return new Response(
-        JSON.stringify({ error: "Missing required fields: packageName, totalAmount, successUrl, cancelUrl" }),
+        JSON.stringify({ error: "Missing required fields: packageType, successUrl, cancelUrl" }),
         { status: 400, headers: { ...headers, "Content-Type": "application/json" } },
       );
     }
 
-    if (totalAmount < 1 || totalAmount > 1_000_000) {
+    // Derive amount server-side from registered prices (issue 3)
+    const pkgData = PACKAGE_PRICES[packageType];
+    if (!pkgData) {
       return new Response(
-        JSON.stringify({ error: "Invalid amount" }),
+        JSON.stringify({ error: "Invalid package type" }),
         { status: 400, headers: { ...headers, "Content-Type": "application/json" } },
       );
     }
+
+    let computedAmount = pkgData.price;
+    const validAddOns: AddOn[] = [];
+    if (Array.isArray(addOns)) {
+      for (const addon of addOns) {
+        const addonPrice = ADDON_PRICES[addon.id];
+        if (addonPrice !== undefined) {
+          const qty = Math.max(1, Math.min(50, addon.qty ?? 1));
+          computedAmount += addonPrice * qty;
+          validAddOns.push({ ...addon, price: addonPrice, qty });
+        }
+      }
+    }
+
+    if (computedAmount < 1 || computedAmount > 1_000_000) {
+      return new Response(
+        JSON.stringify({ error: "Computed amount out of range" }),
+        { status: 400, headers: { ...headers, "Content-Type": "application/json" } },
+      );
+    }
+
+    log("Server-side computed amount", { computedAmount, packageType });
 
     // Build description from add-ons
     const addOnsDesc =
-      Array.isArray(addOns) && addOns.length > 0
-        ? `Add-ons: ${addOns.map((a) => `${a.label} ($${a.price})`).join(", ")}`
+      validAddOns.length > 0
+        ? `Add-ons: ${validAddOns.map((a) => `${a.label} ($${a.price}${(a.qty ?? 1) > 1 ? ` x${a.qty}` : ""})`).join(", ")}`
         : "Base package — no add-ons selected";
 
-    // Create Stripe Checkout Session using inline price_data (no pre-created price required)
+    // Fix issue 10: properly append session_id without breaking existing query params
+    const separator = successUrl.includes("?") ? "&" : "?";
+    const successUrlWithSession = `${successUrl}${separator}session_id={CHECKOUT_SESSION_ID}`;
+
+    // Create Stripe Checkout Session using inline price_data (issue 4)
     const sessionParams: Stripe.Checkout.SessionCreateParams = {
       mode: "payment",
       payment_method_types: ["card"],
@@ -110,21 +153,21 @@ serve(async (req: Request) => {
           price_data: {
             currency: "usd",
             product_data: {
-              name: `${packageName} — Web Design`,
+              name: `${packageName || pkgData.name} — Web Design`,
               description: addOnsDesc,
               metadata: { packageType: packageType ?? "" },
             },
-            unit_amount: Math.round(totalAmount * 100),
+            unit_amount: Math.round(computedAmount * 100),
           },
           quantity: 1,
         },
       ],
-      success_url: `${successUrl}?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: successUrlWithSession,
       cancel_url: cancelUrl,
       metadata: {
         order_id: orderId ?? "",
         package_type: packageType ?? "",
-        add_ons_json: JSON.stringify(addOns ?? []).slice(0, 480),
+        add_ons_json: JSON.stringify(validAddOns).slice(0, 480),
         source: "web_design",
       },
     };

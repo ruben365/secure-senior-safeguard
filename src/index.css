@@ -214,3 +214,7 @@ a[class*="bg-[#1E293B]"] *,
 a[class*="bg-[#1e3a8a]"] * {
   color: inherit !important;
 }
+
+/* Dialog centering — CSS translate is independent of transform (zoom animations).
+   React style prop doesn't serialize the CSS translate property; use a class. */
+.gx-dialog { translate: -50% -50%; }
