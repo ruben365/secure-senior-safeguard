@@ -523,8 +523,20 @@ function Business() {
         {/* Hero — Dark cinematic theme */}
         <HeroBusiness onStrategyCall={openStrategyCall} />
 
-        {/* ═══════════════════ /AI PAGE DESIGN CANVAS ═══════════════════ */}
-        <div className="ai-page-canvas">
+        <iframe
+          src="/ai-content.html"
+          className="w-full border-0"
+          style={{ minHeight: '6000px', background: '#f7f6f3' }}
+          title="AI Services"
+          onLoad={(e) => {
+            const iframe = e.target as HTMLIFrameElement;
+            if (iframe.contentWindow) {
+              iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+            }
+          }}
+        />
+        {/* ═══════════════════ /AI PAGE DESIGN CANVAS (replaced by iframe) ═══════════════════ */}
+        <div className="ai-page-canvas" style={{ display: 'none' }}>
           <div className="aip-blob b1" aria-hidden="true" />
           <div className="aip-blob b2" aria-hidden="true" />
           <div className="aip-blob b3" aria-hidden="true" />
