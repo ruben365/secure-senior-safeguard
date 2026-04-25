@@ -374,29 +374,31 @@ export default function TrainingAiAnalysis() {
   // ─── Style helpers ────────────────────────────────────────────────────────
 
   const pillBase: React.CSSProperties = {
-    background:         'rgba(10,10,12,0.9)',
-    backdropFilter:     'blur(20px) saturate(180%)',
-    WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+    background:         'rgba(10,10,12,0.94)',
+    backdropFilter:     'blur(12px) saturate(150%)',
+    WebkitBackdropFilter: 'blur(12px) saturate(150%)',
     borderRadius:       '999px',
-    border:             '1px solid rgba(255,255,255,0.08)',
-    boxShadow:          '0 2px 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
+    border:             '1px solid rgba(255,255,255,0.14)',
+    boxShadow:          '0 8px 24px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.07)',
     color:              '#a0a0a8',
     display:            'flex',
     alignItems:         'center',
-    gap:                '1px',
-    padding:            '5px 10px',
+    gap:                '2px',
+    padding:            '5px 8px',
   };
 
   const toolBtn: React.CSSProperties = {
     background:     'transparent',
     border:         'none',
     color:          '#7e7e88',
-    padding:        '5px 6px',
+    padding:        '6px',
     borderRadius:   '999px',
     cursor:         'pointer',
     display:        'flex',
     alignItems:     'center',
     justifyContent: 'center',
+    minWidth:       '28px',
+    minHeight:      '28px',
     transition:     'color 0.22s ease, background 0.22s ease, transform 0.22s ease',
   };
 
@@ -433,7 +435,18 @@ export default function TrainingAiAnalysis() {
         />
 
         {/* ── Left pill: Home / Minimize / Theme / Clear / Login / Subscribe ─── */}
-        <div style={{ position: 'absolute', top: '10px', left: '16px', zIndex: 30 }}>
+        <div
+          className="aia-top-menu"
+          style={{
+            position: 'fixed',
+            top: '14px',
+            left: '16px',
+            zIndex: 40,
+            maxWidth: 'calc(100vw - 92px)',
+            overflowX: 'auto',
+            scrollbarWidth: 'none',
+          }}
+        >
           <div style={pillBase}>
             {/* Home */}
             <Link
@@ -519,10 +532,10 @@ export default function TrainingAiAnalysis() {
                   textDecoration: 'none',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  fontSize: '11px',
+                  fontSize: '12px',
                   fontWeight: 600,
                   letterSpacing: '0.02em',
-                  padding: '4px 11px',
+                  padding: '5px 12px',
                   borderRadius: '999px',
                   border: '1px solid rgba(255,255,255,0.15)',
                   background: 'rgba(255,255,255,0.06)',
@@ -554,10 +567,10 @@ export default function TrainingAiAnalysis() {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  fontSize: '11px',
+                  fontSize: '12px',
                   fontWeight: 700,
                   letterSpacing: '0.02em',
-                  padding: '4px 12px',
+                  padding: '5px 13px',
                   borderRadius: '999px',
                   border: 'none',
                   background: 'linear-gradient(135deg, #f5c543 0%, #e0a312 100%)',
@@ -584,7 +597,7 @@ export default function TrainingAiAnalysis() {
         </div>
 
         {/* ── Right pill: About ────────────────────────────────────────────────── */}
-        <div style={{ position: 'absolute', top: '10px', right: '16px', zIndex: 30 }}>
+        <div style={{ position: 'fixed', top: '14px', right: '16px', zIndex: 40 }}>
           <div style={pillBase}>
             <button
               type="button"
@@ -610,7 +623,7 @@ export default function TrainingAiAnalysis() {
         >
 
         {/* ── Main content ─────────────────────────────────────────────────────── */}
-        <main className="flex-1 flex flex-col items-center justify-center px-4 pb-10 pt-9 relative z-10">
+        <main className="flex-1 flex flex-col items-center justify-center px-4 pb-10 pt-12 relative z-10">
 
           {/* Chat history */}
           {messages.length > 0 && (
@@ -900,7 +913,20 @@ export default function TrainingAiAnalysis() {
 
       {/* ── Settings modal ───────────────────────────────────────────────────── */}
       <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
-        <DialogContent style={{ background: '#1c1c1e', borderRadius: '18px', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', maxWidth: '380px', boxShadow: '0 30px 60px rgba(0,0,0,0.6)', padding: '24px' }}>
+        <DialogContent
+          className="aia-settings-modal"
+          style={{
+            background: '#1c1c1e',
+            borderRadius: '18px',
+            border: '1px solid rgba(255,255,255,0.1)',
+            color: '#fff',
+            width: 'min(420px, calc(100vw - 32px))',
+            maxWidth: '420px',
+            maxHeight: 'calc(100svh - 32px)',
+            boxShadow: '0 30px 60px rgba(0,0,0,0.45)',
+            padding: '24px',
+          }}
+        >
           <DialogHeader>
             <DialogTitle style={{ color: '#fff', fontSize: '16px', fontWeight: 600 }}>Settings</DialogTitle>
             <DialogDescription style={{ color: '#8a8a8f', fontSize: '13px' }}>Configure your AI scanner preferences</DialogDescription>
@@ -921,7 +947,7 @@ export default function TrainingAiAnalysis() {
                     if (key === 'darkMode') setDarkMode(d => !d);
                     if (key === 'webSearch') setWebSearch(w => !w);
                   }}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '11px 16px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#e5e5e7', fontSize: '14px', cursor: 'pointer', textAlign: 'left', transition: 'background 0.15s' }}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', minHeight: '48px', padding: '12px 16px', borderRadius: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#e5e5e7', fontSize: '14px', cursor: 'pointer', textAlign: 'left', transition: 'background 0.15s' }}
                   onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.09)')}
                   onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
                 >
@@ -981,7 +1007,7 @@ export default function TrainingAiAnalysis() {
         };
         return (
           <Dialog open={aboutOpen} onOpenChange={setAboutOpen}>
-            <DialogContent className="aia-about-modal" style={{ background: mTheme.bg, borderRadius: '18px', border: `1px solid ${mTheme.border}`, color: mTheme.title, maxWidth: '480px', maxHeight: '85svh', overflowY: 'auto', boxShadow: mTheme.shadow, padding: '0' }}>
+            <DialogContent className="aia-about-modal" style={{ background: mTheme.bg, borderRadius: '18px', border: `1px solid ${mTheme.border}`, color: mTheme.title, width: 'min(560px, calc(100vw - 32px))', maxWidth: '560px', maxHeight: 'calc(100svh - 32px)', overflowY: 'auto', boxShadow: mTheme.shadow, padding: '0' }}>
               {/* Header */}
               <div style={{ padding: '22px 24px 16px', borderBottom: `1px solid ${mTheme.divider}` }}>
                 <DialogTitle style={{ color: mTheme.title, fontSize: '16px', fontWeight: 700, marginBottom: '4px' }}>InVision AI Security Scanner</DialogTitle>
