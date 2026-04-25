@@ -129,9 +129,8 @@ function Business() {
           ref={iframeRef}
           src="/ai-content.html"
           title="AI Services"
-          loading="lazy"
           className="w-full border-0 block"
-          style={{ background: "#f7f6f3", minHeight: "100vh" }}
+          style={{ background: "#f7f6f3", minHeight: "6000px" }}
         />
 
         <Footer />
