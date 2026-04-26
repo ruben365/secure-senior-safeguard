@@ -16412,49 +16412,24 @@ updateSummary();
   var LOCK = '<rect x="175" y="150" width="50" height="40" rx="6" fill="rgba(255,255,255,0.5)"/><path d="M185 150v-15a15 15 0 0130 0v15" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3"/><circle cx="200" cy="170" r="4" fill="rgba(255,255,255,0.8)"/>';
 
   var PHOTOS = {
-    'platform-m1': brandSVG(BARS, '#0D2137', '#1a3a5c', '#F97316'),
-    'platform-m2': brandSVG(NET, '#1a1a2e', '#16213e', '#f5c543'),
-    'platform-m3': brandSVG(SH, '#0f2027', '#203a43', '#F97316'),
-    'platform-m4': brandSVG(GEAR, '#1a1a2e', '#2d1b4e', '#a088ff'),
-    'wwb-receptionist': brandSVG(CHAT, '#0D2137', '#1a3a5c', '#F97316'),
-    'wwb-scheduling': brandSVG(GEAR+'<text x="200" y="220" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="14" font-family="sans-serif">SCHEDULING</text>', '#1a1a2e', '#16213e', '#f5c543'),
-    'wwb-support': brandSVG(SH, '#0f2027', '#203a43', '#4a8f90'),
-    'wwb-intake': brandSVG(LOCK, '#2d1b4e', '#1a1a2e', '#a088ff')
+    'platform-m1': '/img/platform-analytics.png',
+    'platform-m2': '/img/platform-network.png',
+    'platform-m3': '/img/platform-shield.png',
+    'platform-m4': '/img/platform-ai.png',
+    'wwb-receptionist': '/img/wwb-receptionist.png',
+    'wwb-scheduling': '/img/wwb-scheduling.png',
+    'wwb-support': '/img/wwb-support.png',
+    'wwb-intake': '/img/wwb-intake.png'
   };
   var CREATIVE = [
-    brandSVG('<text x="200" y="155" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="28" font-family="sans-serif">✏️</text>', '#2d1b4e', '#4a1942', '#c382b8'),
-    brandSVG('<text x="200" y="155" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="28" font-family="sans-serif">🎨</text>', '#1a3a5c', '#0D2137', '#F97316'),
-    brandSVG('<text x="200" y="155" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="28" font-family="sans-serif">🧩</text>', '#0f2027', '#203a43', '#4a8f90'),
-    brandSVG('<text x="200" y="155" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="28" font-family="sans-serif">⚡</text>', '#1a1a2e', '#0D2137', '#f5c543'),
-    brandSVG('<text x="200" y="155" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="28" font-family="sans-serif">📊</text>', '#203a43', '#0f2027', '#6fb3c9'),
-    brandSVG('<text x="200" y="155" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="28" font-family="sans-serif">🔷</text>', '#16213e', '#1a1a2e', '#7c6fd0')
+    '/img/creative-illustration.png', '/img/creative-vector.png',
+    '/img/creative-character.png', '/img/creative-icon.png',
+    '/img/creative-infographic.png', '/img/creative-pattern.png'
   ];
-  var STAGES = [
-    brandSVG(NET, '#0D2137', '#1a3a5c', '#F97316'),
-    brandSVG(BARS, '#1a1a2e', '#2d1b4e', '#f5c543'),
-    brandSVG(SH, '#0f2027', '#203a43', '#4a8f90'),
-    brandSVG(BOLT, '#16213e', '#0D2137', '#F97316')
-  ];
-  var WHY = [
-    svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F97316"/><stop offset="100%" stop-color="#f5c543"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(#a)"/><text x="50" y="58" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">IN</text></svg>'),
-    svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7c6fd0"/><stop offset="100%" stop-color="#a088ff"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(#a)"/><text x="50" y="58" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">AI</text></svg>'),
-    svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4a8f90"/><stop offset="100%" stop-color="#6fb3c9"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(#a)"/><text x="50" y="58" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">OH</text></svg>'),
-    svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0D2137"/><stop offset="100%" stop-color="#1a3a5c"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(#a)"/><path d="M50 25l15 8v14c0 10-6 18-15 22-9-4-15-12-15-22V33z" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2"/></svg>'),
-    svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F97316"/><stop offset="100%" stop-color="#0D2137"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(#a)"/><text x="50" y="58" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">24</text></svg>'),
-    svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2d1b4e"/><stop offset="100%" stop-color="#7c6fd0"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(#a)"/><text x="50" y="58" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="sans-serif">5★</text></svg>')
-  ];
-  var LAUNCH = [
-    brandSVG(CHAT, '#0D2137', '#1a3a5c', '#F97316'),
-    brandSVG(GEAR, '#1a1a2e', '#16213e', '#f5c543'),
-    brandSVG(NET, '#0f2027', '#203a43', '#4a8f90'),
-    brandSVG(SH, '#2d1b4e', '#1a1a2e', '#a088ff'),
-    brandSVG(BOLT, '#0D2137', '#203a43', '#F97316')
-  ];
-  var TESTIMONIALS = [
-    svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F97316"/><stop offset="100%" stop-color="#f5c543"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(#a)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="36" font-weight="bold" font-family="sans-serif">R</text></svg>'),
-    svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7c6fd0"/><stop offset="100%" stop-color="#a088ff"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(#a)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="36" font-weight="bold" font-family="sans-serif">M</text></svg>'),
-    svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4a8f90"/><stop offset="100%" stop-color="#6fb3c9"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(#a)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="36" font-weight="bold" font-family="sans-serif">K</text></svg>')
-  ];
+  var STAGES = ['/img/stage-1.png', '/img/stage-2.png', '/img/stage-3.png', '/img/stage-4.png'];
+  var WHY = ['/img/why-1.png', '/img/why-2.png', '/img/why-3.png', '/img/why-4.png', '/img/why-5.png', '/img/why-6.png'];
+  var LAUNCH = ['/img/launch-1.png', '/img/launch-2.png', '/img/launch-3.png', '/img/launch-4.png', '/img/launch-5.png'];
+  var TESTIMONIALS = ['/img/testimonial-1.png', '/img/testimonial-2.png', '/img/testimonial-3.png'];
   function fill(slot, urls) {
     var els = document.querySelectorAll('[data-photo-slot="'+slot+'"]');
     els.forEach(function(el, i) {
