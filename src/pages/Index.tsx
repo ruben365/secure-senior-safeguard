@@ -146,13 +146,13 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                   </p>
 
                   <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4 mb-5">
-                    <Button asChild size="lg" className="w-full max-w-[260px] sm:max-w-none sm:w-auto">
+                    <Button asChild variant="heroPrimary" size="xl" className="w-full sm:w-auto font-bold">
                       <Link to="/training#pricing">
-                        Get Protected Today <ArrowRight className="ml-2 w-4 h-4" />
+                        Get Protected Today <ArrowRight className="ml-2 w-5 h-5" />
                       </Link>
                     </Button>
-                    <Button asChild variant="heroOutline" size="lg" className="w-full max-w-[260px] sm:max-w-none sm:w-auto">
-                      <Link to="/ai">Business AI Solutions</Link>
+                    <Button asChild variant="heroOutline" size="xl" className="w-full sm:w-auto">
+                      <a href="/ai">Business AI Solutions</a>
                     </Button>
                   </div>
 
