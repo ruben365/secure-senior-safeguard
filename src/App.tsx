@@ -193,14 +193,12 @@ function PublicRoutes() {
         <Route path="/" element={<PageTransition variant="auto"><Index /></PageTransition>} />
         <Route path="/training" element={<PageTransition variant="auto"><Training /></PageTransition>} />
         <Route path="/training/ai-analysis" element={<PageTransition variant="auto"><TrainingAiAnalysis /></PageTransition>} />
-        <Route path="/ai-workshop" element={<Navigate to="/ai" replace />} />
         <Route path="/business" element={<Navigate to="/ai" replace />} />
         <Route path="/business/ai-receptionist" element={<PageTransition variant="auto"><AIReceptionist /></PageTransition>} />
         <Route path="/business/ai-automation" element={<PageTransition variant="auto"><AIAutomation /></PageTransition>} />
         <Route path="/business/website-design" element={<PageTransition variant="auto"><WebsiteDesign /></PageTransition>} />
         <Route path="/business/website-insurance" element={<PageTransition variant="auto"><WebsiteInsurance /></PageTransition>} />
         <Route path="/business/autonomous-defense-hub" element={<PageTransition variant="auto"><AutonomousDefenseHub /></PageTransition>} />
-        <Route path="/invision-2026" element={<Navigate to="/ai" replace />} />
         {/* Legacy /services/* routes removed - redirect any stragglers to /contact for inquiry */}
         <Route path="/services/*" element={<Navigate to="/contact" replace />} />
         <Route path="/about" element={<PageTransition variant="auto"><About /></PageTransition>} />
