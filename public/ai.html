@@ -16462,6 +16462,31 @@ updateSummary();
   function run(){
     Object.keys(P).forEach(function(k){fill(k,P[k]);});
     fill('creative',C); fill('stage',S); fill('why',W); fill('launch',L); fill('testimonial',T);
+    /* Direct targeting of WWB cards by class name as fallback */
+    var wwbMap = {receptionist:P['wwb-receptionist'], scheduling:P['wwb-scheduling'], support:P['wwb-support'], intake:P['wwb-intake']};
+    Object.keys(wwbMap).forEach(function(cls){
+      document.querySelectorAll('.ai-wwb-img.'+cls).forEach(function(el){
+        if(el.style.backgroundImage && el.style.backgroundImage.indexOf('url')>-1) return;
+        el.style.backgroundImage="url('"+wwbMap[cls]+"')";
+        el.style.backgroundSize='cover';
+        el.style.backgroundPosition='center';
+        el.classList.add('has-photo');
+        el.innerHTML='';
+      });
+    });
+    /* Direct targeting of platform module photos */
+    document.querySelectorAll('.ai-plat-mod').forEach(function(el,i){
+      var keys=['platform-m1','platform-m2','platform-m3','platform-m4'];
+      var ph=el.querySelector('.ai-photo, .ai-plat-photo');
+      if(ph && P[keys[i]]){
+        ph.style.backgroundImage="url('"+P[keys[i]]+"')";
+        ph.style.backgroundSize='cover';
+        ph.style.backgroundPosition='center';
+        ph.classList.add('has-photo');
+        var lbl=ph.querySelector('.ai-photo-label');if(lbl)lbl.style.display='none';
+        var ico=ph.querySelector('.ai-photo-icon');if(ico)ico.style.display='none';
+      }
+    });
   }
   setTimeout(run,500); setTimeout(run,1500); setTimeout(run,3000); setTimeout(run,6000);
   if(window.MutationObserver){var o=new MutationObserver(run);o.observe(document.body,{childList:true,subtree:true});setTimeout(function(){o.disconnect();},12000);}
