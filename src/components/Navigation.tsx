@@ -162,16 +162,15 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             <div className="hidden lg:flex items-center gap-3 xl:gap-5 lg:ml-4 xl:ml-6">
               {primaryLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
-                return (
-                  <PrefetchLink
-                    key={link.name}
-                    to={link.href}
-                    className={`relative text-[13px] font-semibold transition-colors duration-150 ${
-                      isActive
-                        ? "text-orange-400"
-                        : "text-white hover:text-orange-400"
-                    }`}
-                  >
+                const cls = `relative text-[13px] font-semibold transition-colors duration-150 ${
+                  isActive ? "text-orange-400" : "text-white hover:text-orange-400"
+                }`;
+                return link.href === "/ai" ? (
+                  <a key={link.name} href="/ai" className={cls}>
+                    {link.name}
+                  </a>
+                ) : (
+                  <PrefetchLink key={link.name} to={link.href} className={cls}>
                     {link.name}
                   </PrefetchLink>
                 );

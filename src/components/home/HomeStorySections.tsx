@@ -1019,17 +1019,31 @@ export const HomeStorySections = () => {
                   {svc.desc}
                 </p>
                 {/* CTA */}
-                <Link
-                  to={svc.href}
-                  className={`inline-flex items-center gap-2 text-[13px] font-semibold transition-colors group w-fit ${
-                    svc.dark
-                      ? "text-white/60 hover:text-white"
-                      : "text-[#111111] hover:text-[#d96c4a]"
-                  }`}
-                >
-                  {svc.cta}
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                </Link>
+                {svc.href === "/ai" ? (
+                  <a
+                    href="/ai"
+                    className={`inline-flex items-center gap-2 text-[13px] font-semibold transition-colors group w-fit ${
+                      svc.dark
+                        ? "text-white/60 hover:text-white"
+                        : "text-[#111111] hover:text-[#d96c4a]"
+                    }`}
+                  >
+                    {svc.cta}
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  </a>
+                ) : (
+                  <Link
+                    to={svc.href}
+                    className={`inline-flex items-center gap-2 text-[13px] font-semibold transition-colors group w-fit ${
+                      svc.dark
+                        ? "text-white/60 hover:text-white"
+                        : "text-[#111111] hover:text-[#d96c4a]"
+                    }`}
+                  >
+                    {svc.cta}
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                )}
               </div>
             ))}
           </div>
