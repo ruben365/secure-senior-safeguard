@@ -152,7 +152,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                       </Link>
                     </Button>
                     <Button asChild variant="heroOutline" size="xl" className="w-full sm:w-auto">
-                      <a href="/ai">Business AI Solutions</a>
+                      <Link to="/ai">Business AI Solutions</Link>
                     </Button>
                   </div>
 

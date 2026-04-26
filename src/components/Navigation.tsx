@@ -165,11 +165,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 const cls = `relative text-[13px] font-semibold transition-colors duration-150 ${
                   isActive ? "text-orange-400" : "text-white hover:text-orange-400"
                 }`;
-                return link.href === "/ai" ? (
-                  <a key={link.name} href="/ai" className={cls}>
-                    {link.name}
-                  </a>
-                ) : (
+                return (
                   <PrefetchLink key={link.name} to={link.href} className={cls}>
                     {link.name}
                   </PrefetchLink>
