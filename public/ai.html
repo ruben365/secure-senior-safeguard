@@ -16395,23 +16395,12 @@ updateSummary();
   </footer>
 
 
-<script>
-/* Photo fill — branded SVG graphics for all photo slots */
-(function(){
-  /* Generate branded SVG data URIs - InVision colors */
-  function svgURI(svg){ return "data:image/svg+xml," + encodeURIComponent(svg); }
-  function brandSVG(icon, bg1, bg2, accent){
-    return svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="'+bg1+'"/><stop offset="100%" stop-color="'+bg2+'"/></linearGradient></defs><rect width="400" height="300" fill="url(#g)"/><circle cx="320" cy="60" r="80" fill="'+accent+'" opacity="0.12"/><circle cx="80" cy="240" r="60" fill="'+accent+'" opacity="0.08"/>'+icon+'</svg>');
-  }
-  var SH = '<path d="M200 80l60 30v50c0 35-25 65-60 80-35-15-60-45-60-80v-50z" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3"/><path d="M185 155l10 10 25-25" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="3" stroke-linecap="round"/>';
-  var NET = '<circle cx="200" cy="150" r="8" fill="rgba(255,255,255,0.7)"/><circle cx="140" cy="110" r="5" fill="rgba(255,255,255,0.5)"/><circle cx="260" cy="110" r="5" fill="rgba(255,255,255,0.5)"/><circle cx="140" cy="190" r="5" fill="rgba(255,255,255,0.5)"/><circle cx="260" cy="190" r="5" fill="rgba(255,255,255,0.5)"/><line x1="200" y1="150" x2="140" y2="110" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="200" y1="150" x2="260" y2="110" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="200" y1="150" x2="140" y2="190" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="200" y1="150" x2="260" y2="190" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>';
-  var BARS = '<rect x="120" y="180" width="30" height="60" rx="4" fill="rgba(255,255,255,0.25)"/><rect x="160" y="150" width="30" height="90" rx="4" fill="rgba(255,255,255,0.35)"/><rect x="200" y="120" width="30" height="120" rx="4" fill="rgba(255,255,255,0.5)"/><rect x="240" y="100" width="30" height="140" rx="4" fill="rgba(255,255,255,0.65)"/>';
-  var GEAR = '<circle cx="200" cy="150" r="25" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3"/><circle cx="200" cy="150" r="10" fill="rgba(255,255,255,0.4)"/><line x1="200" y1="120" x2="200" y2="110" stroke="rgba(255,255,255,0.5)" stroke-width="3"/><line x1="200" y1="180" x2="200" y2="190" stroke="rgba(255,255,255,0.5)" stroke-width="3"/><line x1="170" y1="150" x2="160" y2="150" stroke="rgba(255,255,255,0.5)" stroke-width="3"/><line x1="230" y1="150" x2="240" y2="150" stroke="rgba(255,255,255,0.5)" stroke-width="3"/>';
-  var BOLT = '<path d="M210 100l-30 55h25l-15 50 40-60h-25z" fill="rgba(255,255,255,0.7)"/>';
-  var CHAT = '<rect x="140" y="110" width="120" height="80" rx="12" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3"/><path d="M170 210l20-20h-30z" fill="rgba(255,255,255,0.4)"/><line x1="165" y1="140" x2="235" y2="140" stroke="rgba(255,255,255,0.35)" stroke-width="2"/><line x1="165" y1="155" x2="215" y2="155" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>';
-  var LOCK = '<rect x="175" y="150" width="50" height="40" rx="6" fill="rgba(255,255,255,0.5)"/><path d="M185 150v-15a15 15 0 0130 0v15" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3"/><circle cx="200" cy="170" r="4" fill="rgba(255,255,255,0.8)"/>';
+</body></html>
 
-  var PHOTOS = {
+<script>
+/* Photo fill — inject user's Midjourney images into all photo slots */
+(function(){
+  var P = {
     'platform-m1': '/img/u4284625358_Hyper-detailed_wide_shot_of_a_futuristic_dark_dat_68fbbbc2-b44e-41b2-8751-a4fee652888a_0.png',
     'platform-m2': '/img/u4284625358_Abstract_still_life_of_geometric_orange_and_dark__aa8a2f8d-7889-4a33-9786-848b0d8dacb5_1.png',
     'platform-m3': '/img/u4284625358_Brand_palette_deep_slate__black_background_warm_ora_91c032f6-764b-48e8-89e6-42b2c14e6d3b.png',
@@ -16421,60 +16410,60 @@ updateSummary();
     'wwb-support': '/img/u4284625358_Cinematic_over-the-shoulder_shot_of_a_glowing_cha_fb93bcb3-9285-48b9-901c-a01526c884b8_0.png',
     'wwb-intake': '/img/u4284625358_Top-down_photograph_of_a_clean_modern_desk_with_a_ee6fbd7e-bfcc-46ea-adab-661f868180b1_0.png'
   };
-  var CREATIVE = [
+  var C = [
     '/img/u4284625358_Abstract_aerial_view_of_glowing_orange_aurora_rib_a581260f-81ff-4669-b209-45ef041f8655_0.png',
     '/img/u4284625358_Ultra-wide_cinematic_shot_of_a_translucent_orange_3b82adba-d3a8-4d36-8937-827bda295050_0.png',
     '/img/u4284625358_Cinematic_wide_social_share_banner_glowing_orange_cec3894a-8df7-4f17-845d-780a84826d52_1.png',
-    '/img/Breno_A_cinematic_ultra-futuristic_scene_set_on_a_sleek_high-en_99b547c7-50c3-49fd-91c3-fd1baa453ac3.png',
-    '/img/dacgermany_Ultra-wide_219_cinematic_header_in_the_kodokalabs_vi_7e5f0fe4-2759-4c68-8aad-1490047d3e38.png',
-    '/img/feiilis_4K_cinematic_branding_mockup_top_section_for_video_game_b8a4a6a0-e6e8-47e9-8986-85300fbe1c40.png'
+    '/img/u4284625358_Abstract_aerial_view_of_glowing_orange_aurora_rib_a581260f-81ff-4669-b209-45ef041f8655_1.png',
+    '/img/u4284625358_Ultra-wide_cinematic_shot_of_a_translucent_orange_3b82adba-d3a8-4d36-8937-827bda295050_1.png',
+    '/img/u4284625358_Cinematic_wide_social_share_banner_glowing_orange_cec3894a-8df7-4f17-845d-780a84826d52_2.png'
   ];
-  var STAGES = [
-    '/img/u4284625358_Cinematic_close-up_of_an_analog_clock_face_merged_1322c895-7a21-4f17-ade3-41a1cd7f7285_0.png',
-    '/img/u4284625358_Clean_bright_product_photograph_of_a_smartphone_r_7edf8317-6c8e-423f-9d01-573f90784bc8_0.png',
-    '/img/u4284625358_family_at_home_reviewing_a_suspicious_email_toget_0de87cad-87b8-4715-a1c6-62c2cac8a373_0.png',
+  var S = [
+    '/img/u4284625358_Cinematic_close-up_of_an_analog_clock_face_merged_1322c895-2d0b-47f1-914a-c5b68e66c3eb_0.png',
+    '/img/u4284625358_Clean_bright_product_photograph_of_a_smartphone_r_7edf8317-2e70-4bc0-b5e6-ef0f8e6e4bb5_0.png',
+    '/img/u4284625358_family_at_home_reviewing_a_suspicious_email_toget_0de87cad-3ed2-41b8-a1b7-1f1422b79e96_0.png',
     '/img/u4284625358_Hyper-detailed_dark_abstract_shot_of_a_glowing_or_cb03196b-a1eb-4c8c-80c5-bb63d38e7f45_1.png'
   ];
-  var WHY = [
-    '/img/u4284625358_cream__off-white__soft_beige_background_peach__co_7e43c714-9868-41d5-be74-c6bcc6770499_0.png',
-    '/img/u4284625358_cream__off-white__soft_beige_background_peach__co_7e43c714-9868-41d5-be74-c6bcc6770499_1.png',
-    '/img/u4284625358_cream__off-white__soft_beige_background_peach__co_7e43c714-9868-41d5-be74-c6bcc6770499_2.png',
-    '/img/u4284625358_cream__off-white__soft_beige_background_peach__co_7e43c714-9868-41d5-be74-c6bcc6770499_3.png',
-    '/img/u4284625358_Top-down_editorial_photo_of_a_cream_paper_day_pla_023b49e2-25ab-457b-8934-36c355e191d1_0.png',
-    '/img/u4284625358_Ultra-wide_minimalist_editorial_photograph_of_sof_2ecd5e5f-0ab8-4e7e-aac3-f3616df3400d_0.png'
+  var W = [
+    '/img/u4284625358_cream__off-white__soft_beige_background_peach__co_7e43c714-c3c5-4765-8b3f-4e1e6e7b5c39_0.png',
+    '/img/u4284625358_cream__off-white__soft_beige_background_peach__co_7e43c714-c3c5-4765-8b3f-4e1e6e7b5c39_1.png',
+    '/img/u4284625358_cream__off-white__soft_beige_background_peach__co_7e43c714-c3c5-4765-8b3f-4e1e6e7b5c39_2.png',
+    '/img/u4284625358_cream__off-white__soft_beige_background_peach__co_7e43c714-c3c5-4765-8b3f-4e1e6e7b5c39_3.png',
+    '/img/u4284625358_Top-down_editorial_photo_of_a_cream_paper_day_pla_023b49e2-2b49-4862-b5c5-dfe06b4a46ab_0.png',
+    '/img/u4284625358_Ultra-wide_minimalist_editorial_photograph_of_sof_2ecd5e5f-7571-4a86-ad44-4f9b6c94ffbb_0.png'
   ];
-  var LAUNCH = [
-    '/img/u4284625358_Cinematic_wide_shot_of_a_modern_Ohio_loft_office__4e101b5d-bfa1-4095-9170-511f8439acf7_0.png',
+  var L = [
+    '/img/u4284625358_Cinematic_wide_shot_of_a_modern_Ohio_loft_office__4e101b5d-b35e-4e3f-9c44-2093d6e1a399_0.png',
     '/img/u4284625358_Top-down_photograph_of_a_clean_modern_desk_with_a_ee6fbd7e-bfcc-46ea-adab-661f868180b1_1.png',
-    '/img/u4284625358_Macro_photograph_of_a_tablet_displaying_a_clean_f_f9019059-84ac-41a2-8dce-8a9776f5a4ff_0.png',
-    '/img/u4284625358_Modern_minimalist_studio_shot_of_a_sleek_headset__625c9384-2f27-4aac-972e-763a5ca1c8cd_0.png',
-    '/img/u4284625358_Abstract_aerial_view_of_glowing_orange_aurora_rib_a581260f-81ff-4669-b209-45ef041f8655_1.png'
+    '/img/u4284625358_Macro_photograph_of_a_tablet_displaying_a_clean_f_f9019059-a0fe-4e98-aa43-3e74b8e6f7b0_0.png',
+    '/img/u4284625358_Modern_minimalist_studio_shot_of_a_sleek_headset__625c9384-a91e-4f70-bd3d-7cc2c8c5a69c_0.png',
+    '/img/u4284625358_Abstract_aerial_view_of_glowing_orange_aurora_rib_a581260f-81ff-4669-b209-45ef041f8655_2.png'
   ];
-  var TESTIMONIALS = [
-    '/img/u4284625358_family_at_home_reviewing_a_suspicious_email_toget_0de87cad-87b8-4715-a1c6-62c2cac8a373_1.png',
-    '/img/u4284625358_two_generations_learning_together_A_father_in_his_d7c59950-6151-4a1f-9b60-642835891207_1.png',
-    '/img/u4284625358_Editorial_portrait-style_photograph_of_a_confiden_c645d78e-492c-4e35-9e6e-829540448a9b_3.png'
+  var T = [
+    '/img/u4284625358_family_at_home_reviewing_a_suspicious_email_toget_0de87cad-3ed2-41b8-a1b7-1f1422b79e96_1.png',
+    '/img/u4284625358_two_generations_learning_together_a_father_and_te_8ff4ba53-c14b-4e25-a82e-d6eb6a5e8a0e_1.png',
+    '/img/u4284625358_Editorial_portrait-style_photograph_of_a_confiden_c645d78e-d6a7-4b74-9aab-04abff4bf8e0_3.png'
   ];
-  function fill(slot, urls) {
-    var els = document.querySelectorAll('[data-photo-slot="'+slot+'"]');
-    els.forEach(function(el, i) {
+  function fill(slot, urls){
+    document.querySelectorAll('[data-photo-slot="'+slot+'"]').forEach(function(el, i){
       var url = Array.isArray(urls) ? urls[i % urls.length] : urls;
-      if (url) {
-        el.style.backgroundImage = "url('"+url+"')";
-        el.style.backgroundSize = 'cover';
-        el.style.backgroundPosition = 'center';
+      if(url){
+        el.style.backgroundImage="url('"+url+"')";
+        el.style.backgroundSize='cover';
+        el.style.backgroundPosition='center';
         el.classList.add('has-photo');
+        var lbl=el.querySelector('.ai-photo-label');
+        if(lbl) lbl.style.display='none';
+        var ico=el.querySelector('.ai-photo-icon');
+        if(ico) ico.style.display='none';
       }
     });
   }
-  setTimeout(function(){
-    Object.keys(PHOTOS).forEach(function(k){ fill(k, PHOTOS[k]); });
-    fill('creative', CREATIVE);
-    fill('stage', STAGES);
-    fill('why', WHY);
-    fill('launch', LAUNCH);
-    fill('testimonial', TESTIMONIALS);
-  }, 800);
+  function run(){
+    Object.keys(P).forEach(function(k){fill(k,P[k]);});
+    fill('creative',C); fill('stage',S); fill('why',W); fill('launch',L); fill('testimonial',T);
+  }
+  setTimeout(run,500); setTimeout(run,1500); setTimeout(run,3000); setTimeout(run,6000);
+  if(window.MutationObserver){var o=new MutationObserver(run);o.observe(document.body,{childList:true,subtree:true});setTimeout(function(){o.disconnect();},12000);}
 })();
 </script>
-</body></html>
