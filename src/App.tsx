@@ -47,7 +47,6 @@ const Auth = lazy(() => import("./pages/Auth"));
 // Non-critical public pages - lazy loaded
 const Training = lazy(() => import("./pages/Training"));
 const TrainingAiAnalysis = lazy(() => import("./pages/TrainingAiAnalysis"));
-const Business = lazy(() => import("./pages/Business"));
 const AIReceptionist = lazy(() => import("./pages/business/AIReceptionist"));
 const AIAutomation = lazy(() => import("./pages/business/AIAutomation"));
 const WebsiteDesign = lazy(() => import("./pages/business/WebsiteDesign"));
@@ -194,7 +193,6 @@ function PublicRoutes() {
         <Route path="/" element={<PageTransition variant="auto"><Index /></PageTransition>} />
         <Route path="/training" element={<PageTransition variant="auto"><Training /></PageTransition>} />
         <Route path="/training/ai-analysis" element={<PageTransition variant="auto"><TrainingAiAnalysis /></PageTransition>} />
-        <Route path="/ai" element={<PageTransition variant="auto"><Business /></PageTransition>} />
         <Route path="/business" element={<Navigate to="/ai" replace />} />
         <Route path="/business/ai-receptionist" element={<PageTransition variant="auto"><AIReceptionist /></PageTransition>} />
         <Route path="/business/ai-automation" element={<PageTransition variant="auto"><AIAutomation /></PageTransition>} />

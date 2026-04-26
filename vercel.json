@@ -27,6 +27,7 @@
     }
   ],
   "rewrites": [
+    { "source": "/ai", "destination": "/ai.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [

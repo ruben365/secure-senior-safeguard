@@ -1,10 +1,20 @@
+import { useState, useCallback } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { HeroBusiness } from "@/components/HeroBusiness";
 import { PageTransition } from "@/components/PageTransition";
+import { ServiceInquiryDialog } from "@/components/ServiceInquiryDialog";
 import { SEO } from "@/components/SEO";
+import { trackButtonClick } from "@/utils/analyticsTracker";
 import { AIPageContent } from "@/components/business/AIPageContent";
 
 function Business() {
+  const [heroInquiryOpen, setHeroInquiryOpen] = useState(false);
+
+  const openStrategyCall = useCallback(() => {
+    setHeroInquiryOpen(true);
+    trackButtonClick("Book Strategy Call", "Business Hero");
+  }, []);
 
   return (
     <PageTransition variant="fade">
@@ -51,9 +61,20 @@ function Business() {
             ],
           }} />
 
-        <Navigation />
+        <Navigation overlay />
+        <HeroBusiness onStrategyCall={openStrategyCall} />
+
         <AIPageContent />
+
         <Footer />
+
+        <ServiceInquiryDialog
+          open={heroInquiryOpen}
+          onOpenChange={setHeroInquiryOpen}
+          serviceName="Business Strategy Call"
+          servicePrice={0}
+          serviceTier="Consultation"
+          serviceDescription="Book a paid strategy call ($199, credited toward your build). We map your goals, recommend the right AI setup, and outline a clear plan." />
       </div>
     </PageTransition>
   );

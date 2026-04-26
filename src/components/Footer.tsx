@@ -258,12 +258,21 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 <ul className="space-y-1">
                   {col.links.map((link) => (
                     <li key={link.to}>
-                      <Link
-                        to={link.to}
-                        className="text-[14px] text-white/75 hover:text-white transition-colors inline-block leading-snug"
-                      >
-                        {link.label}
-                      </Link>
+                      {link.to.startsWith("/ai") ? (
+                        <a
+                          href={link.to}
+                          className="text-[14px] text-white/75 hover:text-white transition-colors inline-block leading-snug"
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link
+                          to={link.to}
+                          className="text-[14px] text-white/75 hover:text-white transition-colors inline-block leading-snug"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
