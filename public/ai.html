@@ -4632,80 +4632,139 @@
   </style>
 
   <div class="wts-scope">
-    <nav class="inv-nav" aria-label="Main">
-      <div class="inv-nav-inner">
-        <a href="#" class="inv-nav-brand" aria-label="InVision Network home">
-          <span class="inv-nav-shield">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
-              <path d="M12 2l9 4v6c0 5-3.5 9-9 10-5.5-1-9-5-9-10V6l9-4z"/>
-              <polyline points="9 12 11 14 15 10"/>
-            </svg>
-          </span>
-          <span class="inv-nav-brand-text">
-            <span class="inv-nav-brand-name">InVision Network</span>
-            <span class="inv-nav-brand-tag">AI Scam Protection</span>
-          </span>
-        </a>
-
-        <div class="inv-nav-links">
-          <a href="#aiPlatform">AI</a>
-          <a href="#workshops">Workshops</a>
-          <a href="#library">Library</a>
-          <a href="#aiWhyChoose">About</a>
-          <div class="inv-nav-more-wrap">
-            <button type="button" class="inv-nav-more" aria-haspopup="true" aria-expanded="false">More
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="inv-nav-more-menu" role="menu">
-              <a href="#careers" role="menuitem">Careers</a>
-              <a href="#faq" role="menuitem">FAQ</a>
-              <a href="#contact" role="menuitem">Contact</a>
-              <a href="#partners" role="menuitem">Partners</a>
-              <a href="#events" role="menuitem">Events</a>
-            </div>
+  <style>
+    .ivn-nav{position:sticky;top:0;z-index:9999;background:transparent;transition:background 250ms ease;padding:0 16px}
+    .ivn-nav.scrolled{background:rgba(0,0,0,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+    .ivn-nav-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+    .ivn-nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;opacity:1;transition:opacity 150ms}
+    .ivn-nav-brand:hover{opacity:.9}
+    .ivn-nav-logo{width:32px;height:32px;filter:brightness(0) invert(1);object-fit:contain}
+    .ivn-nav-brand-name{font-size:14px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.025em}
+    .ivn-nav-brand-tag{font-size:9px;font-weight:700;color:rgba(255,255,255,.75);letter-spacing:.2em;text-transform:uppercase;line-height:1;display:none}
+    @media(min-width:640px){.ivn-nav-brand-tag{display:block}}
+    .ivn-nav-links{display:none;align-items:center;gap:16px;margin-left:16px;flex:1}
+    @media(min-width:1024px){.ivn-nav-links{display:flex}}
+    .ivn-nav-link{font-size:13px;font-weight:600;color:#fff;text-decoration:none;transition:color 150ms;position:relative}
+    .ivn-nav-link:hover,.ivn-nav-link.active{color:#fb923c}
+    .ivn-more-wrap{position:relative}
+    .ivn-more-btn{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#fff;background:none;border:none;cursor:pointer;padding:0;transition:color 150ms}
+    .ivn-more-btn:hover{color:#fb923c}
+    .ivn-more-chevron{width:16px;height:16px;transition:transform 200ms}
+    .ivn-more-wrap:focus-within .ivn-more-chevron,.ivn-more-wrap:hover .ivn-more-chevron{transform:rotate(180deg)}
+    .ivn-more-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;width:192px;border-radius:12px;border:1px solid rgba(255,255,255,.15);padding:6px 0;z-index:50;background:linear-gradient(180deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.04) 100%);backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);box-shadow:0 12px 32px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.12)}
+    .ivn-more-wrap:focus-within .ivn-more-dropdown,.ivn-more-wrap:hover .ivn-more-dropdown{display:block}
+    .ivn-more-link{display:block;padding:10px 16px;font-size:13.5px;color:rgba(255,255,255,.9);text-decoration:none;transition:color 150ms,background 150ms}
+    .ivn-more-link:hover{color:#fb923c;background:rgba(255,255,255,.06)}
+    .ivn-nav-right{display:flex;align-items:center;gap:6px}
+    .ivn-nav-phone{display:none;align-items:center;gap:6px;color:rgba(255,255,255,.8);font-size:12px;font-weight:500;text-decoration:none;padding:6px 8px;border-radius:6px;transition:color 150ms;white-space:nowrap}
+    @media(min-width:1024px){.ivn-nav-phone{display:flex}}
+    .ivn-nav-phone:hover{color:#fb923c}
+    .ivn-nav-donate{display:none;align-items:center;gap:6px;color:rgba(255,255,255,.8);font-size:12px;font-weight:500;background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:6px;transition:color 150ms,background 150ms}
+    @media(min-width:1024px){.ivn-nav-donate{display:flex}}
+    .ivn-nav-donate:hover{color:#fb923c;background:rgba(249,115,22,.1)}
+    .ivn-nav-divider{display:none;width:1px;height:16px;background:#374151;margin:0 4px}
+    @media(min-width:1024px){.ivn-nav-divider{display:block}}
+    .ivn-nav-login{display:none;align-items:center;height:34px;padding:0 16px;font-size:12px;font-weight:600;border-radius:9999px;color:#fff;background:linear-gradient(180deg,#c2410c 0%,#9a3412 100%);border:1px solid #7c2d12;text-decoration:none;transition:all 200ms;box-shadow:0 1px 0 0 rgba(255,255,255,.18) inset,0 8px 20px -6px rgba(217,108,74,.5);white-space:nowrap}
+    @media(min-width:640px){.ivn-nav-login{display:flex}}
+    .ivn-nav-login:hover{background:linear-gradient(180deg,#ea580c 0%,#c2410c 100%);transform:translateY(-1px)}
+    .ivn-nav-icon-btn{padding:8px;border-radius:9999px;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:rgba(255,255,255,.75);transition:border-color 150ms}
+    .ivn-nav-icon-btn:hover{border-color:rgba(255,255,255,.4)}
+    .ivn-hamburger{display:flex}
+    @media(min-width:1024px){.ivn-hamburger{display:none}}
+    .ivn-mob-bd{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(0,0,0,.3);z-index:10000}
+    .ivn-mob-bd.open{display:block;animation:ivn-bd-in 200ms ease-out}
+    @keyframes ivn-bd-in{from{opacity:0}to{opacity:1}}
+    .ivn-mob-menu{display:none;position:fixed;top:56px;right:0;z-index:10001;width:min(50vw,200px);max-height:calc(80vh - 56px);overflow-y:auto;background:rgba(255,255,255,.08);backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border-left:1px solid rgba(255,255,255,.15);border-bottom-left-radius:16px;padding-bottom:8px}
+    .ivn-mob-menu.open{display:block;animation:ivn-slide-in 200ms ease-out}
+    @keyframes ivn-slide-in{from{transform:translateX(100%)}to{transform:translateX(0)}}
+    .ivn-mob-hdr{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .ivn-mob-lbl{font-size:11px;font-weight:600;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.1em}
+    .ivn-mob-close{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.7);padding:4px;border-radius:6px}
+    .ivn-mob-link{display:block;padding:10px 16px;font-size:14px;color:rgba(255,255,255,.9);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);transition:color 150ms}
+    .ivn-mob-link:hover{color:#fb923c}
+    .ivn-mob-divider{height:1px;background:rgba(255,255,255,.1);margin:4px 0}
+    .ivn-mob-login{display:block;margin:8px 12px;padding:10px;text-align:center;font-size:13px;font-weight:600;color:#fff;background:linear-gradient(180deg,#c2410c 0%,#9a3412 100%);border-radius:8px;text-decoration:none}
+  </style>
+  <nav class="ivn-nav" id="ivnNavBar" aria-label="InVision Network">
+    <div class="ivn-nav-inner">
+      <a href="https://www.invisionnetwork.org/" class="ivn-nav-brand">
+        <img src="/shield-logo-192.png" alt="InVision Network" class="ivn-nav-logo" loading="eager" />
+        <div>
+          <div class="ivn-nav-brand-name">InVision Network</div>
+          <div class="ivn-nav-brand-tag">AI Scam Protection</div>
+        </div>
+      </a>
+      <div class="ivn-nav-links">
+        <a href="/ai" class="ivn-nav-link active">AI</a>
+        <a href="https://www.invisionnetwork.org/training" class="ivn-nav-link">Workshops</a>
+        <a href="https://www.invisionnetwork.org/library" class="ivn-nav-link">Library</a>
+        <a href="https://www.invisionnetwork.org/about" class="ivn-nav-link">About</a>
+        <div class="ivn-more-wrap" tabindex="0">
+          <button type="button" class="ivn-more-btn" aria-label="More links">
+            More <svg class="ivn-more-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="ivn-more-dropdown">
+            <a href="https://www.invisionnetwork.org/careers" class="ivn-more-link">Careers</a>
+            <a href="https://www.invisionnetwork.org/faq" class="ivn-more-link">FAQ</a>
+            <a href="https://www.invisionnetwork.org/contact" class="ivn-more-link">Contact</a>
           </div>
         </div>
-
-        <button type="button" class="inv-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="invMobileMenu" onclick="(function(b){var open=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',!open);var m=document.getElementById('invMobileMenu');if(m){m.classList.toggle('open',!open);}document.body.style.overflow=!open?'hidden':'';})(this)">
-          <span></span><span></span><span></span>
-        </button>
-
-        <div class="inv-nav-actions">
-          <button type="button" class="inv-icon-btn" aria-label="Notifications">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          </button>
-          <button type="button" class="inv-icon-btn" aria-label="Cart">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
-          </button>
-          <span class="inv-divider" aria-hidden="true"></span>
-          <a href="tel:+19377497579" class="inv-nav-phone">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
-            (937) 749-7579
-          </a>
-          <button type="button" class="inv-nav-donate">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            Donate
-          </button>
-          <span class="inv-divider" aria-hidden="true"></span>
-          <a href="#login" class="inv-nav-login">Login<span class="inv-login-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
-          <button type="button" class="inv-icon-btn" aria-label="Search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </button>
-        </div>
       </div>
-    </nav>
-
-    <div class="inv-mobile-menu" id="invMobileMenu" role="dialog" aria-label="Mobile navigation">
-      <a href="#aiPlatform" onclick="document.querySelector('.inv-mobile-toggle').click()">AI</a>
-      <a href="#workshops" onclick="document.querySelector('.inv-mobile-toggle').click()">Workshops</a>
-      <a href="#library" onclick="document.querySelector('.inv-mobile-toggle').click()">Library</a>
-      <a href="#aiWhyChoose" onclick="document.querySelector('.inv-mobile-toggle').click()">About</a>
-      <a href="#more" onclick="document.querySelector('.inv-mobile-toggle').click()">More</a>
-      <div class="inv-mobile-divider"></div>
-      <a href="tel:+19377497579">(937) 749-7579</a>
-      <a href="#donate">Donate</a>
-      <a href="#login" class="inv-mobile-login">Login</a>
+      <div class="ivn-nav-right">
+        <a href="tel:+19377497579" class="ivn-nav-phone" aria-label="Call us">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.79 19.79 19.79 0 011.01 2.18 2 2 0 013 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+          <span>(937)&nbsp;749&#x2011;7579</span>
+        </a>
+        <button type="button" class="ivn-nav-donate" aria-label="Donate">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span>Donate</span>
+        </button>
+        <div class="ivn-nav-divider"></div>
+        <a href="https://www.invisionnetwork.org/portal" class="ivn-nav-login">Login</a>
+        <button type="button" class="ivn-nav-icon-btn" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button type="button" class="ivn-nav-icon-btn ivn-hamburger" id="ivnHamBtn" aria-label="Open menu" aria-expanded="false">
+          <svg id="ivnHamIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
     </div>
+  </nav>
+  <div class="ivn-mob-bd" id="ivnBd" onclick="ivnClose()"></div>
+  <div class="ivn-mob-menu" id="ivnMobMenu">
+    <div class="ivn-mob-hdr">
+      <span class="ivn-mob-lbl">Menu</span>
+      <button type="button" class="ivn-mob-close" onclick="ivnClose()" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <a href="/ai" class="ivn-mob-link">AI</a>
+    <a href="https://www.invisionnetwork.org/training" class="ivn-mob-link">Workshops</a>
+    <a href="https://www.invisionnetwork.org/library" class="ivn-mob-link">Library</a>
+    <a href="https://www.invisionnetwork.org/about" class="ivn-mob-link">About</a>
+    <a href="https://www.invisionnetwork.org/careers" class="ivn-mob-link">Careers</a>
+    <a href="https://www.invisionnetwork.org/faq" class="ivn-mob-link">FAQ</a>
+    <a href="https://www.invisionnetwork.org/contact" class="ivn-mob-link">Contact</a>
+    <div class="ivn-mob-divider"></div>
+    <a href="tel:+19377497579" class="ivn-mob-link">(937) 749-7579</a>
+    <a href="https://www.invisionnetwork.org/portal" class="ivn-mob-login">Login</a>
+  </div>
+  <script>
+    (function(){
+      var nav=document.getElementById('ivnNavBar');
+      var btn=document.getElementById('ivnHamBtn');
+      var menu=document.getElementById('ivnMobMenu');
+      var bd=document.getElementById('ivnBd');
+      var open=false;
+      window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+      if(window.scrollY>20)nav.classList.add('scrolled');
+      window.ivnClose=function(){menu.classList.remove('open');bd.classList.remove('open');btn.setAttribute('aria-expanded','false');open=false;};
+      btn.addEventListener('click',function(){
+        if(open){window.ivnClose();}
+        else{menu.classList.add('open');bd.classList.add('open');btn.setAttribute('aria-expanded','true');open=true;}
+      });
+    })();
+  </script>
 
     <section class="wts-hero">
       <div class="wts-hero-inner">
@@ -16253,145 +16312,116 @@ updateSummary();
     }
   </style>
 
-  <footer class="inv-footer" role="contentinfo">
-
-    <!-- Scrolling AI/tech logos strip -->
-    <div class="inv-logos" aria-hidden="true">
-      <div class="inv-logos-track">
-        <span>OpenAI</span><span>Google AI</span><span>Microsoft Azure</span><span>Amazon AWS</span><span>IBM Watson</span><span>Anthropic</span><span>Meta AI</span><span>NVIDIA</span><span>Cloudflare</span><span>Stripe</span>
-        <span>OpenAI</span><span>Google AI</span><span>Microsoft Azure</span><span>Amazon AWS</span><span>IBM Watson</span><span>Anthropic</span><span>Meta AI</span><span>NVIDIA</span><span>Cloudflare</span><span>Stripe</span>
-        <span>OpenAI</span><span>Google AI</span><span>Microsoft Azure</span><span>Amazon AWS</span><span>IBM Watson</span><span>Anthropic</span><span>Meta AI</span><span>NVIDIA</span><span>Cloudflare</span><span>Stripe</span>
-      </div>
-    </div>
-
-    <!-- Brand + Newsletter band -->
-    <div class="inv-hero-band">
-      <div>
-        <span class="inv-eyebrow">Security-first &nbsp;&bull;&nbsp; Privacy-first</span>
-        <div class="inv-brand-row">
-          <span class="inv-shield" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.5 9-9 10-5.5-1-9-5-9-10V6l9-4z"/><polyline points="9 12 11 14 15 10"/></svg>
-          </span>
-          <a href="#" class="inv-brand-name" aria-label="InVision Network — back to home">InVision Network</a>
-        </div>
-        <div class="inv-brand-tag">AI Security &amp; Protection</div>
-        <p class="inv-brand-desc">Protecting families and businesses from AI-powered scams with cutting-edge technology and expert training.</p>
-        <div class="inv-contact-row">
-          <span class="item">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Serving Kettering, Dayton &amp; Montgomery County, OH
-          </span>
-          <a class="item" href="mailto:hello@invisionnetwork.org">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
-            hello@invisionnetwork.org
+  <style>
+    .ivn-footer{background:linear-gradient(180deg,hsl(213 28% 10%) 0%,hsl(213 24% 7%) 60%,hsl(213 22% 5%) 100%);color:#fff;position:relative;padding:32px 16px 24px;isolation:isolate}
+    .ivn-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(217,108,74,.28) 20%,rgba(249,115,22,.45) 50%,rgba(217,108,74,.28) 80%,transparent 100%)}
+    .ivn-footer-inner{max-width:1200px;margin:0 auto}
+    .ivn-footer-top{display:flex;flex-direction:column;gap:24px;margin-bottom:28px}
+    @media(min-width:1024px){.ivn-footer-top{flex-direction:row;justify-content:space-between}}
+    .ivn-footer-brand{display:flex;align-items:center;gap:12px;text-decoration:none;margin-bottom:12px;width:fit-content}
+    .ivn-footer-logo{width:26px;height:26px;filter:brightness(0) invert(1)}
+    .ivn-footer-brand-name{font-size:17px;font-weight:800;color:#fff;line-height:1}
+    .ivn-footer-brand-sub{font-size:10px;color:rgba(255,255,255,.7);font-weight:700;text-transform:uppercase;letter-spacing:.18em}
+    .ivn-footer-desc{font-size:14px;color:rgba(255,255,255,.7);max-width:380px;line-height:1.5;margin-bottom:12px}
+    .ivn-footer-contact{display:flex;flex-direction:column;gap:5px;font-size:13px;color:rgba(255,255,255,.6)}
+    .ivn-footer-contact a{color:rgba(255,255,255,.6);text-decoration:none;transition:color 150ms}
+    .ivn-footer-contact a:hover{color:#fff}
+    .ivn-footer-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    @media(min-width:768px){.ivn-footer-cols{grid-template-columns:repeat(5,1fr)}}
+    .ivn-footer-col-hd{font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.18em;margin-bottom:8px}
+    .ivn-footer-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px}
+    .ivn-footer-col a{font-size:14px;color:rgba(255,255,255,.7);text-decoration:none;line-height:1.4;display:inline-block;transition:color 150ms}
+    .ivn-footer-col a:hover{color:#fff}
+    .ivn-footer-bot{margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:12px}
+    @media(min-width:768px){.ivn-footer-bot{flex-direction:row;justify-content:space-between;align-items:center}}
+    .ivn-footer-copy{font-size:12px;color:rgba(255,255,255,.4)}
+    .ivn-footer-socials{display:flex;gap:8px}
+    .ivn-footer-soc{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);text-decoration:none;transition:background 150ms,color 150ms}
+    .ivn-footer-soc:hover{background:rgba(255,255,255,.12);color:#fff}
+    .ivn-footer-disc{margin-top:14px;font-size:11px;color:rgba(255,255,255,.3);line-height:1.5;max-width:820px}
+    .ivn-footer-disc a{color:rgba(255,255,255,.4)}
+  </style>
+  <footer class="ivn-footer" role="contentinfo">
+    <div class="ivn-footer-inner">
+      <div class="ivn-footer-top">
+        <div style="max-width:400px">
+          <a href="https://www.invisionnetwork.org/" class="ivn-footer-brand">
+            <img src="/shield-logo-192.png" alt="InVision Network" class="ivn-footer-logo" loading="lazy" />
+            <div>
+              <div class="ivn-footer-brand-name">InVision Network</div>
+              <div class="ivn-footer-brand-sub">AI Security &amp; Protection</div>
+            </div>
           </a>
-          <a class="item" href="tel:+19377497579">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
-            (937) 749-7579
-          </a>
+          <p class="ivn-footer-desc">Protecting families and businesses from AI-powered scams with cutting-edge technology and expert training.</p>
+          <div class="ivn-footer-contact">
+            <span>&#x1F4CD; Serving Kettering, Dayton &amp; Montgomery County, OH</span>
+            <a href="mailto:hello@invisionnetwork.org">&#x2709; hello@invisionnetwork.org</a>
+            <a href="tel:+19377497579">&#x1F4DE; (937) 749-7579</a>
+          </div>
+        </div>
+        <div class="ivn-footer-cols">
+          <div class="ivn-footer-col">
+            <div class="ivn-footer-col-hd">Navigation</div>
+            <ul>
+              <li><a href="https://www.invisionnetwork.org/">Home</a></li>
+              <li><a href="https://www.invisionnetwork.org/about">About</a></li>
+              <li><a href="https://www.invisionnetwork.org/library">Library</a></li>
+              <li><a href="https://www.invisionnetwork.org/portfolio">Portfolio</a></li>
+              <li><a href="https://www.invisionnetwork.org/articles">Articles</a></li>
+              <li><a href="https://www.invisionnetwork.org/careers">Careers</a></li>
+            </ul>
+          </div>
+          <div class="ivn-footer-col">
+            <div class="ivn-footer-col-hd">Services</div>
+            <ul>
+              <li><a href="/ai">AI for Business</a></li>
+              <li><a href="/ai#svc-ai-receptionist">AI Receptionist</a></li>
+              <li><a href="/ai#svc-smart-scheduling">Smart Scheduling</a></li>
+              <li><a href="/ai#svc-website-design">Website Design</a></li>
+              <li><a href="/ai#svc-website-insurance">Website Insurance</a></li>
+            </ul>
+          </div>
+          <div class="ivn-footer-col">
+            <div class="ivn-footer-col-hd">Training</div>
+            <ul>
+              <li><a href="https://www.invisionnetwork.org/training">Workshops</a></li>
+              <li><a href="https://www.invisionnetwork.org/training/ai-analysis">AI Scam Analysis</a></li>
+              <li><a href="https://www.invisionnetwork.org/library">Digital Library</a></li>
+              <li><a href="https://www.invisionnetwork.org/training#pricing">Protection Plans</a></li>
+            </ul>
+          </div>
+          <div class="ivn-footer-col">
+            <div class="ivn-footer-col-hd">Support</div>
+            <ul>
+              <li><a href="https://www.invisionnetwork.org/faq">FAQ</a></li>
+              <li><a href="https://www.invisionnetwork.org/help">Help Center</a></li>
+              <li><a href="https://www.invisionnetwork.org/contact">Contact Us</a></li>
+              <li><a href="https://www.invisionnetwork.org/status">System Status</a></li>
+            </ul>
+          </div>
+          <div class="ivn-footer-col">
+            <div class="ivn-footer-col-hd">Legal</div>
+            <ul>
+              <li><a href="https://www.invisionnetwork.org/privacy-policy">Privacy Policy</a></li>
+              <li><a href="https://www.invisionnetwork.org/terms-of-service">Terms of Service</a></li>
+              <li><a href="https://www.invisionnetwork.org/refund-policy">Refund Policy</a></li>
+              <li><a href="https://www.invisionnetwork.org/cookie-policy">Cookie Policy</a></li>
+              <li><a href="https://www.invisionnetwork.org/disclaimer">Disclaimer</a></li>
+            </ul>
+          </div>
         </div>
       </div>
-
-      <aside class="inv-news">
-        <span class="inv-news-eyebrow">Stay Protected</span>
-        <h3>Monthly AI safety tips &amp; scam alerts.</h3>
-        <p>Join the families and businesses we protect across Ohio. No spam, just the threats worth knowing about.</p>
-        <form class="inv-news-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed';">
-          <input type="email" placeholder="your@email.com" aria-label="Email address for newsletter" required>
-          <button type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
-        </form>
-      </aside>
-    </div>
-
-    <!-- Link columns -->
-    <nav class="inv-cols" aria-label="Footer">
-      <div class="inv-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#library">Library</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#articles">Articles</a></li>
-          <li><a href="#careers">Careers</a></li>
-          <li><a href="#partners">Partners</a></li>
-          <li><a href="#events">Events</a></li>
-        </ul>
-      </div>
-      <div class="inv-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="#ai-business">AI for Business</a></li>
-          <li><a href="#receptionist">AI Receptionist</a></li>
-          <li><a href="#scheduling">Smart Scheduling</a></li>
-          <li><a href="#websites">Website Design</a></li>
-          <li><a href="#insurance">Website Insurance</a></li>
-        </ul>
-      </div>
-      <div class="inv-col">
-        <h4>Training</h4>
-        <ul>
-          <li><a href="#workshops">Workshops</a></li>
-          <li><a href="#scam-analysis">AI Scam Analysis</a></li>
-          <li><a href="#digital-library">Digital Library</a></li>
-          <li><a href="#protection-plans">Protection Plans</a></li>
-        </ul>
-      </div>
-      <div class="inv-col">
-        <h4>Support</h4>
-        <ul>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#help">Help Center</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-          <li><a href="#status">System Status</a></li>
-        </ul>
-      </div>
-      <div class="inv-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="#privacy">Privacy Policy</a></li>
-          <li><a href="#terms">Terms of Service</a></li>
-          <li><a href="#refund">Refund Policy</a></li>
-          <li><a href="#cookies">Cookie Policy</a></li>
-          <li><a href="#aup">Acceptable Use</a></li>
-          <li><a href="#disclaimer">Disclaimer</a></li>
-          <li><a href="#sitemap">Sitemap</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Mission strip -->
-    <div class="inv-mission">
-      <p><strong>We proudly support veterans and children with cancer.</strong> A portion of every service goes toward these causes.</p>
-    </div>
-
-    <!-- Bottom legal bar -->
-    <div class="inv-bottom">
-      <div class="inv-bottom-top">
-        <div class="inv-bottom-left">
-          <span>&copy; 2026 InVision Network. All rights reserved.</span>
-          <span class="inv-badge" aria-label="InVision Network BBB Accreditation">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            BBB Accredited
-          </span>
-          <span class="inv-badge">
-            <svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.5 9-9 10-5.5-1-9-5-9-10V6l9-4z"/></svg>
-            Veteran Owned
-          </span>
-        </div>
-        <div class="inv-social" aria-label="Social links">
-          <a href="#facebook" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg></a>
-          <a href="#linkedin" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17.34V10H6v7.34h2.34zM7.17 8.83a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72zM18 17.34v-4.04c0-2.16-1.16-3.16-2.7-3.16-1.25 0-1.81.69-2.12 1.17V10h-2.34v7.34h2.34v-4.1c0-.22.02-.44.08-.6.18-.44.58-.9 1.26-.9.89 0 1.24.68 1.24 1.66v3.94H18z"/></svg></a>
-          <a href="#youtube" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
-          <a href="#instagram" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.94c-3.14 0-3.51.01-4.75.07-1.07.05-1.65.23-2.04.38-.51.2-.88.44-1.27.83-.39.39-.63.76-.83 1.27-.15.39-.33.97-.38 2.04C2.67 8.49 2.66 8.86 2.66 12s.01 3.51.07 4.75c.05 1.07.23 1.65.38 2.04.2.51.44.88.83 1.27.39.39.76.63 1.27.83.39.15.97.33 2.04.38 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c1.07-.05 1.65-.23 2.04-.38.51-.2.88-.44 1.27-.83.39-.39.63-.76.83-1.27.15-.39.33-.97.38-2.04.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.05-1.07-.23-1.65-.38-2.04-.2-.51-.44-.88-.83-1.27-.39-.39-.76-.63-1.27-.83-.39-.15-.97-.33-2.04-.38-1.24-.06-1.61-.07-4.75-.07zm0 3.3a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm0 7.6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5.85-7.78a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z"/></svg></a>
+      <div class="ivn-footer-bot">
+        <p class="ivn-footer-copy">&copy; 2025 InVision Network LLC &middot; Kettering, Ohio &middot; All rights reserved</p>
+        <div class="ivn-footer-socials">
+          <a href="https://facebook.com/invisionnetwork" class="ivn-footer-soc" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://linkedin.com/company/invision-network" class="ivn-footer-soc" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://youtube.com/invisionnetwork" class="ivn-footer-soc" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="hsl(213 24% 7%)"/></svg></a>
+          <a href="https://instagram.com/invisionnetwork" class="ivn-footer-soc" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
         </div>
       </div>
-      <p class="inv-disclaimer">
-        InVision Network provides educational services only. We are not legal, financial, tax, or licensed cybersecurity professionals. In case of active fraud or identity theft, contact local law enforcement (911), your bank's fraud department, and report to the FTC at IdentityTheft.gov. We never request passwords, 2FA codes, or bank information.
-        <a href="#disclaimer">Full Disclaimer</a><span class="sep">&middot;</span><a href="#privacy">Privacy</a><span class="sep">&middot;</span><a href="#terms">Terms</a>
-      </p>
+      <p class="ivn-footer-disc">InVision Network provides educational services only. Not a licensed legal, financial, tax, or cybersecurity firm. If you experience active fraud or identity theft, contact law enforcement (911), your bank&apos;s fraud department, and report to the FTC at <a href="https://IdentityTheft.gov">IdentityTheft.gov</a>. We never request passwords, 2FA codes, or bank information.</p>
     </div>
-
   </footer>
 
 
