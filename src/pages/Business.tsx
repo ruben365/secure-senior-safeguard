@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { HeroBusiness } from "@/components/HeroBusiness";
@@ -6,73 +6,14 @@ import { PageTransition } from "@/components/PageTransition";
 import { ServiceInquiryDialog } from "@/components/ServiceInquiryDialog";
 import { SEO } from "@/components/SEO";
 import { trackButtonClick } from "@/utils/analyticsTracker";
+import { AIPageContent } from "@/components/business/AIPageContent";
 
 function Business() {
   const [heroInquiryOpen, setHeroInquiryOpen] = useState(false);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const openStrategyCall = useCallback(() => {
     setHeroInquiryOpen(true);
     trackButtonClick("Book Strategy Call", "Business Hero");
-  }, []);
-
-  // Sync iframe height to its content (same-origin only). Uses ResizeObserver
-  // when available, falls back to a single onLoad measurement otherwise.
-  useEffect(() => {
-    const iframe = iframeRef.current;
-    if (!iframe) return;
-
-    let observer: ResizeObserver | null = null;
-    let cleanupOnUnload: (() => void) | null = null;
-
-    const syncHeight = () => {
-      try {
-        const doc = iframe.contentWindow?.document;
-        if (!doc) return;
-        const h = Math.max(
-          doc.body?.scrollHeight ?? 0,
-          doc.documentElement?.scrollHeight ?? 0,
-        );
-        if (h > 0) iframe.style.height = `${h}px`;
-      } catch {
-        // cross-origin or detached window — ignore
-      }
-    };
-
-    const attach = () => {
-      try {
-        const doc = iframe.contentWindow?.document;
-        if (!doc?.documentElement) return;
-        syncHeight();
-        if (typeof ResizeObserver !== "undefined") {
-          observer = new ResizeObserver(syncHeight);
-          observer.observe(doc.documentElement);
-          if (doc.body) observer.observe(doc.body);
-        }
-        const onUnload = () => {
-          observer?.disconnect();
-          observer = null;
-        };
-        iframe.contentWindow?.addEventListener("unload", onUnload, { once: true });
-        cleanupOnUnload = () =>
-          iframe.contentWindow?.removeEventListener("unload", onUnload);
-      } catch {
-        // same-origin not yet ready — onLoad will retry
-      }
-    };
-
-    iframe.addEventListener("load", attach);
-    if (iframe.contentDocument?.readyState === "complete") attach();
-
-    const onWindowResize = () => syncHeight();
-    window.addEventListener("resize", onWindowResize);
-
-    return () => {
-      iframe.removeEventListener("load", attach);
-      window.removeEventListener("resize", onWindowResize);
-      observer?.disconnect();
-      cleanupOnUnload?.();
-    };
   }, []);
 
   return (
@@ -123,15 +64,7 @@ function Business() {
         <Navigation overlay />
         <HeroBusiness onStrategyCall={openStrategyCall} />
 
-        {/* AI design — rendered straight from public/ai-content.html so it
-            stays a 1:1 visual match. Hero above and Footer below are React. */}
-        <iframe
-          ref={iframeRef}
-          src="/ai-content.html"
-          title="AI Services"
-          className="w-full border-0 block"
-          style={{ background: "#f7f6f3", minHeight: "6000px" }}
-        />
+        <AIPageContent />
 
         <Footer />
 
