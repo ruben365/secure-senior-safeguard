@@ -4642,7 +4642,8 @@
     .ivn-nav-brand-name{font-size:14px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.025em}
     .ivn-nav-brand-tag{font-size:9px;font-weight:700;color:rgba(255,255,255,.75);letter-spacing:.2em;text-transform:uppercase;line-height:1;display:none}
     @media(min-width:640px){.ivn-nav-brand-tag{display:block}}
-    .ivn-nav-links{display:none;align-items:center;gap:16px;margin-left:16px;flex:1}
+    .ivn-nav-links{display:none;align-items:center;gap:12px;margin-left:16px;flex:1}
+    @media(min-width:1280px){.ivn-nav-links{gap:20px}}
     @media(min-width:1024px){.ivn-nav-links{display:flex}}
     .ivn-nav-link{font-size:13px;font-weight:600;color:#fff;text-decoration:none;transition:color 150ms;position:relative}
     .ivn-nav-link:hover,.ivn-nav-link.active{color:#fb923c}
@@ -4655,7 +4656,8 @@
     .ivn-more-wrap:focus-within .ivn-more-dropdown,.ivn-more-wrap:hover .ivn-more-dropdown{display:block}
     .ivn-more-link{display:block;padding:10px 16px;font-size:13.5px;color:rgba(255,255,255,.9);text-decoration:none;transition:color 150ms,background 150ms}
     .ivn-more-link:hover{color:#fb923c;background:rgba(255,255,255,.06)}
-    .ivn-nav-right{display:flex;align-items:center;gap:6px}
+    .ivn-nav-right{display:flex;align-items:center;gap:4px}
+    @media(min-width:640px){.ivn-nav-right{gap:8px}}
     .ivn-bell{display:none}
     @media(min-width:1024px){.ivn-bell{display:flex}}
     .ivn-cart{display:flex}
@@ -4670,8 +4672,9 @@
     .ivn-nav-login{display:none;align-items:center;height:34px;padding:0 16px;font-size:12px;font-weight:600;border-radius:9999px;color:#fff;background:linear-gradient(180deg,#c2410c 0%,#9a3412 100%);border:1px solid #7c2d12;text-decoration:none;transition:all 200ms;box-shadow:0 1px 0 0 rgba(255,255,255,.18) inset,0 8px 20px -6px rgba(217,108,74,.5);white-space:nowrap}
     @media(min-width:640px){.ivn-nav-login{display:flex}}
     .ivn-nav-login:hover{background:linear-gradient(180deg,#ea580c 0%,#c2410c 100%);transform:translateY(-1px)}
-    .ivn-nav-icon-btn{padding:8px;border-radius:9999px;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:rgba(255,255,255,.75);transition:border-color 150ms}
-    .ivn-nav-icon-btn:hover{border-color:rgba(255,255,255,.4)}
+    /* Scope under .ivn-nav to beat .wts-scope button{background:none;border:none} (specificity 0-1-1 → 0-2-0) */
+    .ivn-nav .ivn-nav-icon-btn{padding:8px;border-radius:9999px;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:rgba(255,255,255,.75);transition:border-color 150ms}
+    .ivn-nav .ivn-nav-icon-btn:hover{border-color:rgba(255,255,255,.4)}
     .ivn-hamburger{display:flex}
     @media(min-width:1024px){.ivn-hamburger{display:none}}
     .ivn-mob-bd{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(0,0,0,.3);z-index:10000}
