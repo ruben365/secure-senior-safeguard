@@ -562,11 +562,23 @@
     letter-spacing: -0.025em;
   }
 
-  /* Primary CTA — compact pill on mobile */
+  /* CTAs — stack full-width for easy tapping on mobile */
+  .hero-home__ctas {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   .hero-home__cta {
-    height: 21px;
-    padding: 0 0.62rem;
-    font-size: 0.75rem;
+    width: 100%;
+    justify-content: center;
+    height: 48px;
+    padding: 0 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  .hero-home__cta svg {
+    width: 14px;
+    height: 14px;
   }
 
   /* Overlay: swap side-wall dark for gentle top-to-bottom
