@@ -295,7 +295,7 @@ const WebsiteDesign = () => {
 
         <main>
           {/* Hero Section */}
-          <section className="relative overflow-hidden min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-6">
+          <section className="relative overflow-hidden min-h-[100svh] flex items-center pt-[clamp(100px,14vw,140px)] pb-6">
             {/* Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
 

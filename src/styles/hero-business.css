@@ -18,7 +18,7 @@
 /* ═══ 1. CONTAINER ═══ */
 .hero-biz {
   position: relative;
-  min-height: 100dvh;
+  min-height: 100svh;
   width: 100%;
   overflow: visible;
   background-color: var(--biz-bg);
@@ -30,7 +30,7 @@
 
 @media (min-width: 1024px) {
   .hero-biz {
-    min-height: 100dvh;
+    min-height: 100svh;
   }
 }
 

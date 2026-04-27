@@ -26,7 +26,7 @@
    ═══════════════════════════════════════════ */
 .hero-ws {
   position: relative;
-  min-height: 100dvh;
+  min-height: 100svh;
   width: 100%;
   overflow: hidden;
   background-color: #080b11;
